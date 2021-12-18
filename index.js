@@ -28,6 +28,9 @@ app.post('/insert',async(req,res)=>{
     }
 })
 
+app.get('/',(req,res)=>{
+    res.send("'/read' to fetch data from api");
+})
 app.get('/read',(req,res)=>{
     EmployeeSchema.find({},(err,result)=>{
         if (err) {
