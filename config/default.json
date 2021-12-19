@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://Akash:Akash@symbl.tx4xx.mongodb.net/EmployeeDatabase?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://Brax:Brax@symbl.tx4xx.mongodb.net/EmployeeDatabase?retryWrites=true&w=majority",
   "API_KEY": "mykey"
 }
