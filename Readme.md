@@ -1,6 +1,6 @@
-# NextJS Boilerplate
+# Sentinel
 
-An opinionated boilerplate to kickstart projects using NextJS
+Webapp to the moon. 🌙
 
 **Features**
 
