@@ -1,0 +1,15 @@
+name: branch-protection-rules
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    steps:
+    - name: Force enable "include administrators" branch protection
+      uses: benjefferies/branch-protection-bot@master
+      if: always()
+      with:
+        access_token: ${{ secrets.ACCESS_TOKEN }}
+        enforce_admins: true
