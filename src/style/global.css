@@ -1,0 +1,195 @@
+* {
+  padding: 0%;
+  margin: 0%;
+  font-family: 'Roboto', sans-serif;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.LogoCover {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.MainLogoName {
+  margin: 20px;
+  margin-top: 10px;
+  font-size: 25px;
+  color: rgb(105, 105, 105);
+  margin-left: 0px;
+}
+.MainLogoName span {
+  font-size: 10px;
+}
+.MainLogoNavbar {
+  margin: 20px;
+  margin-top: 10px;
+  font-size: 30px;
+  color: yellowgreen;
+}
+.MainDash {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+.MainDashLeft {
+  width: 15%;
+  height: 100%;
+  font-weight: 900;
+  overflow: scroll;
+  box-shadow: 0px 0px 5px -3px black;
+}
+.MaindashRight {
+  width: 85%;
+  height: 100%;
+  background-color: rgba(197, 197, 197, 0.183);
+  display: flex;
+  flex-direction: column;
+}
+
+.MainDashLeftDetail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.MainDashLeftDetail button {
+  background-color: brown;
+}
+.MainDashNavbar {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MainDashNavbarCover {
+  margin-top: 1%;
+  width: 98%;
+  height: 95%;
+  display: flex;
+  background: white;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px -3px black;
+}
+.MainDashNavbarleft {
+  width: 70%;
+  display: flex;
+  height: 50%;
+  align-items: center;
+}
+
+.SearchFunctionCover {
+  width: 70vw;
+  display: flex;
+  justify-content: start;
+  margin: 20px;
+}
+.SearchTextBoxCover {
+  width: 50%;
+  border: 2px solid rgb(0, 189, 199);
+  border-bottom-left-radius: 50px;
+  border-top-left-radius: 50px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: white;
+}
+.SearchTextBoxCover span {
+  width: 10%;
+  color: rgb(0, 189, 199);
+}
+.SearchTextBox {
+  width: 90%;
+  border: none;
+  outline: none;
+}
+.SearchButton {
+  padding: 10px 20px;
+  color: white;
+  background: rgb(0, 189, 199);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+}
+.SearchButton:hover {
+  background: rgb(0, 101, 106);
+}
+.MainDashNavbarRight {
+  width: 30%;
+  height: 50%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.MainDashTable {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ProfileSpacer {
+  width: 10%;
+}
+
+.MaintableContent {
+  width: 95%;
+  height: 90%;
+  margin-top: 20px;
+}
+.Maintablebottom {
+  width: 100%;
+  height: fit-content;
+  padding: 10px;
+  background: rgb(0, 189, 199);
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 0px 5px -3px black;
+  align-items: center;
+}
+.MaintableContent table{
+    width: 100%;
+    background: white;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 0px 5px -3px black;
+    table-layout: fixed;
+}
+.MaintableContent thead{
+    height: 60px;
+    border-bottom: 2px solid rgba(0, 189, 199, 0.313);
+    background: rgb(0, 189, 199);
+    color: white;
+    font-size: 13px;
+}
+.MaintableContent table tbody tr{
+    margin-top: 140px;
+    transition: 0.2s ease;
+    height: 50px
+
+}
+.MaintableContent table tbody tr:hover{
+    background: rgb(0, 146, 199);
+    color: white;
+    transform: scale(1.02);
+}
+.MaintableContent table tbody tr td{
+    border-bottom: 1px solid rgba(0, 189, 199, 0.313);
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 10px;
+}
+.MaintableContent table tbody tr td span{
+    font-weight: 800;
+}

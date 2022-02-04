@@ -1,18 +1,21 @@
-import { HomepageCounter } from '@containers/counter/HomepageCounter'
-import Link from 'next/link'
-
-/**
- * Homepage
- */
+import Dashboard from '@components/DashBoard/Dashboard'
+import { useEffect, useState } from 'react'
+import Login from '../components/DashBoard/Login'
+import QuizApi from 'src/api/Quiz'
 const HomePage: React.FC = () => {
+  const [statusLogin, setStatusLogin] = useState(false);
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    QuizApi.tableData().then((datas:any)=>setData(datas[0]))
+  }, []);
+
   return (
-    <main>
-      <h1>Hello, worfld!</h1>
-      <Link href={'/reset'}>
-        <a>reset page</a>
-      </Link>
-      <HomepageCounter />
-    </main>
+    <>
+      {
+        statusLogin ? <Dashboard data={data}/> : <Login setStatusLogin={setStatusLogin} />
+      }
+    </>
   )
 }
 
