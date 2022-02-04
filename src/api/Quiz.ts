@@ -1,7 +1,7 @@
 import Http from './index'
 
 export default class QuizApi {
-  static tableData(payload = {}) {
+  static tableData() {
     const loginPromise = new Http().httpGet('/data', {})
     return loginPromise
   }

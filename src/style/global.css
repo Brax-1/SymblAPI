@@ -157,8 +157,12 @@
   box-shadow: 0px 0px 5px -3px black;
   align-items: center;
 }
+.MainTableCover{
+  width: 100%;
+  overflow: scroll;
+}
 .MaintableContent table{
-    width: 100%;
+    width: 200%;
     background: white;
     text-align: center;
     border-top-left-radius: 10px;
@@ -171,7 +175,6 @@
     border-bottom: 2px solid rgba(0, 189, 199, 0.313);
     background: rgb(0, 189, 199);
     color: white;
-    font-size: 13px;
 }
 .MaintableContent table tbody tr{
     margin-top: 140px;
@@ -188,7 +191,6 @@
     border-bottom: 1px solid rgba(0, 189, 199, 0.313);
     white-space: nowrap;
     overflow: hidden;
-    font-size: 10px;
 }
 .MaintableContent table tbody tr td span{
     font-weight: 800;

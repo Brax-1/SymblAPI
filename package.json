@@ -4,11 +4,12 @@
   "description": "Webapp to the moon",
   "main": "index.js",
   "scripts": {
+    "server":" json-server --watch db.json",
     "test": "NODE_ENV=test jest --passWithNoTests",
     "test:dev": "NODE_ENV=test jest --watchAll",
     "start": "NODE_ENV=production PORT=$PORT next start",
     "build": "rm -rf .next && next build",
-    "dev": "next dev",
+    "dev": "PORT=3006 next dev",
     "export": "npm run build && next export",
     "prettier": "prettier  --write **/*.{ts,tsx,js}",
     "lint:ts": "npm run prettier && eslint --fix 'src/**/*.{ts,tsx}'",
