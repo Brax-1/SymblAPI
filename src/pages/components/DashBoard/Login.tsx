@@ -1,19 +1,18 @@
 import { Button, Checkbox, LinearProgress } from '@material-ui/core'
 import { Alert } from '@mui/material'
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import style from '../../style/SignIn.module.css'
+import style from '../../../style/SignIn.module.css'
 let showAlert = <></>
-const Login = (props: any) => {
+const Login = () => {
   const [loading, setLoading] = useState(false)
   const [loginStatus, setLoginStatus] = useState(0)
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
-  // const router = useRouter();
+  const router = useRouter()
 
   async function handleLogin() {
     setLoading(true)
-    console.log(userName, password)
     const url = `https://profved.com/wp-json/wp/v1/remote_authentication/?username=${userName}&password=${password}`
     const data = await fetch(url)
     const parsedData = await data.json()
@@ -28,7 +27,9 @@ const Login = (props: any) => {
           Successfully Sign in
         </Alert>
       )
-      props.setStatusLogin(true)
+      setTimeout(() => {
+        router.push('/components/DashBoard/Dashboard')
+      }, 1000)
     } else if (parsedData.code.toString() === '401') {
       showAlert = (
         <Alert variant="filled" severity="error" style={{ borderRadius: '0' }}>

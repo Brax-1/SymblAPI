@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { AppProps } from 'next/app'
 import { storeWrapper } from '@store/store'
 import '@common/css/layout.scss'
-import "../style/global.css"
+import '../style/global.css'
 
 /**
  * withRedux HOC

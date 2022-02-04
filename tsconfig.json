@@ -26,7 +26,7 @@
     ],
     "paths": {
       "@components/*": [
-        "./src/components/*"
+        "src/pages/components/*"
       ],
       "@containers/*": [
         "./src/containers/*"

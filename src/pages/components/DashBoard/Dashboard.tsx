@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import QuizApi from 'src/api/Quiz'
 import {
   List,
   ListItem,
@@ -23,12 +24,34 @@ import {
 } from '@material-ui/icons'
 import Pagination from '@mui/material/Pagination'
 
-const Dashboard = (props: any) => {
+interface ApiInnerData {
+  activity_name: string
+  attemp_numer: number
+  attempt_type: boolean
+  consistency: string
+  date: string
+  leaderboard_rank: number
+  level: string
+  level_attempt_type: boolean
+  name: string
+  score: number
+}
+const Dashboard = () => {
   const [open, setOpen] = React.useState(true)
   const [opentrash, setOpentrash] = React.useState(true)
-  const handleClick = (funct: any, val: boolean) => {
-    funct(!val)
+  const handleClick = (callback: (n: boolean) => void, val: boolean) => {
+    callback(!val)
   }
+  const [data, setData] = useState<ApiInnerData[]>([])
+
+  async function getData() {
+    const data = ((await QuizApi.tableData()) as unknown) as ApiInnerData[][]
+    setData(data[0])
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
   return (
     <>
       <div className="MainDash">
@@ -192,22 +215,51 @@ const Dashboard = (props: any) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {console.log(props.data.length, 'Dash')}
-                    {props.data !== undefined
-                      ? props.data.map((datas: any, index: number) => {
+                    {data !== undefined
+                      ? data.map((datas: ApiInnerData, index: number) => {
                           return (
                             <tr key={index}>
                               <td>
-                                <span>#{index}</span>
+                                <span>#{index + 1}</span>
                               </td>
                               <td>{datas.date}</td>
                               <td>{datas.name}</td>
                               <td>{datas.activity_name}</td>
                               <td>{datas.score}</td>
-                              <td>{datas.attempt_type}</td>
+                              <td>
+                                {datas.attempt_type ? (
+                                  <div className="tagButton GoodCss">
+                                    Best Attempt
+                                  </div>
+                                ) : (
+                                  'Not Best Attempt'
+                                )}
+                              </td>
                               <td>{datas.attemp_numer}</td>
-                              <td>{datas.level}</td>
-                              <td>{datas.level_attempt_type}</td>
+                              <td>
+                                {datas.level === 'GENIUS' ? (
+                                  <div className="tagButton Genius">GENIUS</div>
+                                ) : datas.level === 'MASTER' ? (
+                                  <div className="tagButton Master">MASTER</div>
+                                ) : datas.level === 'STARTER' ? (
+                                  <div className="tagButton Starter">
+                                    STARTER
+                                  </div>
+                                ) : (
+                                  <div className="tagButton Challenger">
+                                    CHALLENGER
+                                  </div>
+                                )}
+                              </td>
+                              <td>
+                                {datas.level_attempt_type ? (
+                                  <div className="tagButton GoodCss">
+                                    First Time Crossed
+                                  </div>
+                                ) : (
+                                  'Already Crossed'
+                                )}
+                              </td>
                               <td>
                                 <span>#{datas.leaderboard_rank}</span>
                               </td>

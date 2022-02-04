@@ -1,5 +1,5 @@
 import { increment, decrement } from '@store/counter/counterActions'
-import { Counter } from '@components/counter/Counter'
+import { Counter } from 'src/pages/components/counter/Counter'
 import { AppState } from '@store/store'
 import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
