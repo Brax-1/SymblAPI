@@ -7,7 +7,7 @@ import Link from 'next/link'
 const HomePage: React.FC = () => {
   return (
     <main>
-      <h1>Hello, world!</h1>
+      <h1>Hello, worfld!</h1>
       <Link href={'/reset'}>
         <a>reset page</a>
       </Link>
