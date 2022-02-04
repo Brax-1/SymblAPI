@@ -16,7 +16,6 @@ const Login = () => {
     const url = `https://profved.com/wp-json/wp/v1/remote_authentication/?username=${userName}&password=${password}`
     const data = await fetch(url)
     const parsedData = await data.json()
-
     if (parsedData.code.toString() === '200') {
       showAlert = (
         <Alert
@@ -27,9 +26,7 @@ const Login = () => {
           Successfully Sign in
         </Alert>
       )
-      setTimeout(() => {
-        router.push('/components/DashBoard/Dashboard')
-      }, 1000)
+      router.push('/DashBoard/Dashboard')
     } else if (parsedData.code.toString() === '401') {
       showAlert = (
         <Alert variant="filled" severity="error" style={{ borderRadius: '0' }}>
