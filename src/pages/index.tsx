@@ -1,4 +1,4 @@
-import Login from './components/DashBoard/Login'
+import Login from './DashBoard/Login'
 
 const HomePage: React.FC = () => {
   return (

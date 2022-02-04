@@ -1,4 +1,4 @@
-import { Icon } from 'src/pages/components/icon/Icon'
+import { Icon } from '@components/icon/Icon'
 import styles from './counter.module.scss'
 
 interface CounterProps {

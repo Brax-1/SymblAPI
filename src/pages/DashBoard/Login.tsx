@@ -2,7 +2,7 @@ import { Button, Checkbox, LinearProgress } from '@material-ui/core'
 import { Alert } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import style from '../../../style/SignIn.module.css'
+import style from '../../style/SignIn.module.css'
 let showAlert = <></>
 const Login = () => {
   const [loading, setLoading] = useState(false)
@@ -46,9 +46,6 @@ const Login = () => {
 
   return (
     <>
-      {/* <Alert variant="filled" severity="success">
-                Successfully Sign in
-            </Alert> */}
       {loginStatus != 0 ? showAlert : null}
       <div className={style.MainLoginCover}>
         <div className={style.LoginCover}>
@@ -113,26 +110,3 @@ const Login = () => {
 }
 
 export default Login
-
-// <FormControl variant="outlined">
-//                                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-//                                     <OutlinedInput
-//                                         id="outlined-adornment-password"
-//                                         type={values.showPassword ? 'text' : 'password'}
-//                                         value={values.password}
-//                                         onChange={handleChange('password')}
-//                                         endAdornment={
-//                                             <InputAdornment position="end">
-//                                                 <IconButton
-//                                                     aria-label="toggle password visibility"
-//                                                     onClick={handleClickShowPassword}
-//                                                     onMouseDown={handleMouseDownPassword}
-//                                                     edge="end"
-//                                                 >
-//                                                     {values.showPassword ? <VisibilityOff /> : <Visibility />}
-//                                                 </IconButton>
-//                                             </InputAdornment>
-//                                         }
-//                                         label="Password"
-//                                     />
-//                                 </FormControl>
