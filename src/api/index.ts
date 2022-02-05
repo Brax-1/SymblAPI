@@ -1,12 +1,15 @@
 import axios, { AxiosInstance } from 'axios'
 
-const API_URL = 'http://localhost:3000'
+export enum BASE_URL {
+  API_URL = 'http://localhost:3000',
+  PROFVED_URL = 'https://profved.com/wp-json/wp/v1',
+}
 
 export default class Http {
   private axiosRequest: AxiosInstance
-  constructor() {
+  constructor(baseUrl: BASE_URL) {
     this.axiosRequest = axios.create({
-      baseURL: API_URL,
+      baseURL: baseUrl,
       timeout: 5000,
       responseType: 'json',
     })
