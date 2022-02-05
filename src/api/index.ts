@@ -17,9 +17,16 @@ export default class HttpLocal {
 
   httpGet(url: string, params = {}) {
     return new Promise((resolve, reject) => {
-      const queryParams = JSON.stringify({ ...params })
+      let queryParams = ''
+      if (Object.keys(params).length) {
+        queryParams = '?'
+        for (const key of Object.entries(params)) {
+          queryParams += `${key[0]}=${key[1]}&`
+        }
+        queryParams = queryParams.slice(0, -1)
+      }
       this.axiosRequest
-        .get(`${url}?${queryParams}`)
+        .get(`${url}${queryParams}`)
         .then((response) => {
           if (response.status === 200)
             return resolve({ ...response.data, error: false })
