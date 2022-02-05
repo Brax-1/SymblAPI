@@ -5,7 +5,7 @@ export enum BASE_URL {
   PROFVED_URL = 'https://profved.com/wp-json/wp/v1',
 }
 
-export default class HttpLocal {
+export default class Http {
   private axiosRequest: AxiosInstance
   constructor(baseUrl: BASE_URL) {
     this.axiosRequest = axios.create({
