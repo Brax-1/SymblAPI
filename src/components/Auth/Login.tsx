@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import style from '../../style/SignIn.module.css'
 import QuizApi from 'src/api/Quiz'
+import Image from 'next/image'
+import vedxlogo from '../../images/ved_logo.png'
 let showAlert = <></>
 
 interface loginMessageFormat {
@@ -53,7 +55,11 @@ const Login = () => {
         <div className={style.LoginCover}>
           {loading ? <LinearProgress style={{ width: '100%' }} /> : null}
           <div className={style.LoginDataCover}>
-            <div className={style.LoginLeftCover}></div>
+            <div className={style.LoginLeftCover}>
+              <div style={{ width: '70%', height: '80%' }}>
+                <Image src={vedxlogo} alt="fill" />
+              </div>
+            </div>
             <div className={style.LoginRightCover}>
               <div className={style.LoginSignInText}>Sign In With ProfVed</div>
               <div className={style.LoginInputCover}>
