@@ -9,7 +9,6 @@ export default class QuizApi {
     return quizDataPromise
   }
   static loginAuth(url: string, params: UserLoginParams) {
-    console.log(url)
     const loginAuthPromise = new Http(BASE_URL.PROFVED_URL).httpGet(url, params)
     return loginAuthPromise
   }
