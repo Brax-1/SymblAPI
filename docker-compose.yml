@@ -8,5 +8,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - /usr/src/sentinel/node_modules
-      - /usr/src/sentinel/.next
+      - node_modules:/usr/src/sentinel/node_modules
+      - next:/usr/src/sentinel/.next
+volumes:
+  node_modules:
+  next:
