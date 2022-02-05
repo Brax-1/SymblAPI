@@ -9,8 +9,8 @@
             "attemp_numer": 3,
             "level": "STARTER",
             "level_attempt_type": true,
-            "leaderboard_rank": 10,
-            "consistency": "2"
+            "leaderboard_rank": 5,
+            "consistency": "3"
         },
         {
             "date": "2022-02-03 00:31:56",
@@ -21,8 +21,8 @@
             "attemp_numer": 3,
             "level": "CHALLENGER",
             "level_attempt_type": true,
-            "leaderboard_rank": 10,
-            "consistency": "2"
+            "leaderboard_rank": 3,
+            "consistency": "4"
         },
         {
             "date": "2022-02-03 00:31:56",
@@ -34,7 +34,7 @@
             "level": "MASTER",
             "level_attempt_type": false,
             "leaderboard_rank": 10,
-            "consistency": "2"
+            "consistency": "1"
         },
         {
             "date": "2022-02-03 00:31:56",
@@ -45,7 +45,7 @@
             "attemp_numer": 3,
             "level": "GENIUS",
             "level_attempt_type": true,
-            "leaderboard_rank": 10,
+            "leaderboard_rank": 6,
             "consistency": "2"
         }]
     ]
