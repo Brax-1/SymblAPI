@@ -3,7 +3,7 @@ import { Alert } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import style from '../../style/SignIn.module.css'
-import AuthApi from 'src/api/Auth'
+import QuizApi from 'src/api/Quiz'
 let showAlert = <></>
 
 interface loginMessageFormat {
@@ -19,10 +19,12 @@ const Login = () => {
   const router = useRouter()
   async function handleLogin() {
     setLoading(true)
-    const url = `https://profved.com/wp-json/wp/v1/remote_authentication/?username=${userName}&password=${password}`
-    const parsedData = ((await AuthApi.loginAuthCheck(
-      url
-    )) as unknown) as loginMessageFormat
+    const url = `/remote_authentication/`
+    const parsedData = ((await QuizApi.loginAuth(url, {
+      username: userName,
+      password: password,
+    })) as unknown) as loginMessageFormat
+    console.log(parsedData)
     if (parsedData.code.toString() === '200') {
       showAlert = (
         <Alert
