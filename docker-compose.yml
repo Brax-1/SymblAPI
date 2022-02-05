@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  sentinel:
+    ports:
+      - 3000:3000
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /usr/src/sentinel/node_modules
+      - /usr/src/sentinel/.next

@@ -49,6 +49,14 @@ And then start you application with a provided port number (defaults to 3000 if 
 $ PORT=8080 npm run start
 ```
 
+### Docker
+```sh
+docker-compose build
+docker-compose up 
+# detach mode
+docker-compose up -d
+```
+
 ### 🖨 Static
 
 You can export your application to a static website as well:
