@@ -3,19 +3,26 @@ import { Alert } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import style from '../../style/SignIn.module.css'
+import QuizApi from 'src/api/Quiz'
 let showAlert = <></>
+
+interface loginMessageFormat {
+  code: string | number
+  error: boolean
+  msg: string
+}
+
 const Login = () => {
   const [loading, setLoading] = useState(false)
-  const [loginStatus, setLoginStatus] = useState(0)
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
-
   async function handleLogin() {
     setLoading(true)
     const url = `https://profved.com/wp-json/wp/v1/remote_authentication/?username=${userName}&password=${password}`
-    const data = await fetch(url)
-    const parsedData = await data.json()
+    const parsedData = ((await QuizApi.loginAuth(
+      url
+    )) as unknown) as loginMessageFormat
     if (parsedData.code.toString() === '200') {
       showAlert = (
         <Alert
@@ -26,24 +33,20 @@ const Login = () => {
           Successfully Sign in
         </Alert>
       )
-      router.push('/DashBoard/Dashboard')
+      router.push('/dashboard')
     } else if (parsedData.code.toString() === '401') {
       showAlert = (
         <Alert variant="filled" severity="error" style={{ borderRadius: '0' }}>
           Wrong Credentials
         </Alert>
       )
+      setLoading(false)
     }
-    setLoginStatus(parsedData.code)
-    setLoading(false)
-    setTimeout(() => {
-      setLoginStatus(0)
-    }, 3000)
   }
 
   return (
     <>
-      {loginStatus != 0 ? showAlert : null}
+      {showAlert != <></> ? showAlert : null}
       <div className={style.MainLoginCover}>
         <div className={style.LoginCover}>
           {loading ? <LinearProgress style={{ width: '100%' }} /> : null}

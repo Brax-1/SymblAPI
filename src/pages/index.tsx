@@ -1,5 +1,4 @@
-import Login from './DashBoard/Login'
-
+import Login from '../components/Auth/Login'
 const HomePage: React.FC = () => {
   return (
     <>

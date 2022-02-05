@@ -1,12 +1,8 @@
 import Http from './index'
 
 export default class AuthApi {
-  static login(payload = {}) {
-    const loginPromise = new Http().httpPost(
-      '/dashboard/game-quiz',
-      {},
-      payload
-    )
+  login(payload = {}) {
+    const loginPromise = new Http().httpPost('/login', {}, payload)
     return loginPromise
   }
 }

@@ -3,6 +3,7 @@ import { AppProps } from 'next/app'
 import { storeWrapper } from '@store/store'
 import '@common/css/layout.scss'
 import '../style/global.css'
+import Script from 'next/script'
 
 /**
  * withRedux HOC
@@ -10,7 +11,13 @@ import '../style/global.css'
  */
 
 const CustomApp: FC<AppProps> = ({ Component, pageProps }) => (
-  <Component {...pageProps} />
+  <>
+    <Script
+      src="https://kit.fontawesome.com/8773ed09b3.js"
+      strategy="afterInteractive"
+    />
+    <Component {...pageProps} />
+  </>
 )
 
 export default storeWrapper.withRedux(CustomApp)
