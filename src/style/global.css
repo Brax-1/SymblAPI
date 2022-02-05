@@ -189,6 +189,7 @@
     border-bottom: 2px solid rgba(0, 189, 199, 0.313);
     background: rgb(0, 189, 199);
     color: white;
+    cursor: pointer;
 }
 .MaintableContent table tbody tr{
     margin-top: 140px;
