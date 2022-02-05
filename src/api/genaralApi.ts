@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from 'axios'
 
-const API_URL = 'http://localhost:3000'
+const API_URL = ''
 
-export default class HttpLocal {
+export default class HttpGeneral {
   private axiosRequest: AxiosInstance
   constructor() {
     this.axiosRequest = axios.create({
@@ -12,11 +12,10 @@ export default class HttpLocal {
     })
   }
 
-  httpGet(url: string, params = {}) {
+  httpGet(url: string) {
     return new Promise((resolve, reject) => {
-      const queryParams = JSON.stringify({ ...params })
       this.axiosRequest
-        .get(`${url}?${queryParams}`)
+        .get(`${url}`)
         .then((response) => {
           if (response.status === 200)
             return resolve({ ...response.data, error: false })
