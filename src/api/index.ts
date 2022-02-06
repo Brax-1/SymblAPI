@@ -15,16 +15,21 @@ export default class Http {
     })
   }
 
+  makeQueryParams(params = {}) {
+    let queryParams = ''
+    if (Object.keys(params).length) {
+      queryParams = '?'
+      for (const key of Object.entries(params)) {
+        queryParams += `${key[0]}=${key[1]}&`
+      }
+      queryParams = queryParams.slice(0, -1)
+    }
+    return queryParams
+  }
+
   httpGet(url: string, params = {}) {
     return new Promise((resolve, reject) => {
-      let queryParams = ''
-      if (Object.keys(params).length) {
-        queryParams = '?'
-        for (const key of Object.entries(params)) {
-          queryParams += `${key[0]}=${key[1]}&`
-        }
-        queryParams = queryParams.slice(0, -1)
-      }
+      const queryParams = this.makeQueryParams(params)
       this.axiosRequest
         .get(`${url}${queryParams}`)
         .then((response) => {
@@ -41,9 +46,9 @@ export default class Http {
 
   httpPost(url: string, params = {}, payload = {}) {
     return new Promise((resolve, reject) => {
-      const queryParams = JSON.stringify({ ...params })
+      const queryParams = this.makeQueryParams(params)
       this.axiosRequest
-        .post(`${url}?${queryParams}`, payload)
+        .post(`${url}${queryParams}`, payload)
         .then((response) => {
           if (response.status === 200)
             return resolve({ ...response.data, error: false })
