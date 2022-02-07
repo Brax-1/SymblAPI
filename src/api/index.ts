@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 
 export enum BASE_URL {
-  API_URL = 'http://localhost:3000',
+  API_URL = 'http://localhost:3001/api/v1/',
   PROFVED_URL = 'https://profved.com/wp-json/wp/v1',
 }
 
@@ -25,6 +25,13 @@ export default class Http {
       queryParams = queryParams.slice(0, -1)
     }
     return queryParams
+  }
+
+  addTokenToHeader() {
+    if (location.pathname !== '/') {
+      const token = localStorage.getItem('token')
+      this.axiosRequest.defaults.headers.common.Authorization = `Bearer ${token}`
+    }
   }
 
   httpGet(url: string, params = {}) {

@@ -6,12 +6,14 @@ import style from '../../style/SignIn.module.css'
 import QuizApi from 'src/api/Quiz'
 import Image from 'next/image'
 import vedxlogo from '../../images/ved_logo.png'
+import { setTokenInStorge } from 'src/utils/auth'
 let showAlert = <></>
 
 interface loginMessageFormat {
   code: string | number
   error: boolean
   msg: string
+  data: any
 }
 
 const Login = () => {
@@ -21,12 +23,11 @@ const Login = () => {
   const router = useRouter()
   async function handleLogin() {
     setLoading(true)
-    const url = `/remote_authentication/`
+    const url = `profved/login`
     const parsedData = ((await QuizApi.loginAuth(url, {
       username: userName,
       password: password,
     })) as unknown) as loginMessageFormat
-    console.log(parsedData)
     if (parsedData.code.toString() === '200') {
       showAlert = (
         <Alert
@@ -37,6 +38,7 @@ const Login = () => {
           Successfully Sign in
         </Alert>
       )
+      setTokenInStorge(parsedData.data.token)
       router.push('/dashboard')
     } else if (parsedData.code.toString() === '401') {
       showAlert = (
