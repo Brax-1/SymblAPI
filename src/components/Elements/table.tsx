@@ -7,6 +7,7 @@ import {
   TableRow,
   TableHead,
 } from '@material-ui/core'
+import { MyTableProps } from '@components/interfaces/dashboardinterface'
 
 export default function MyTable(props: MyTableProps) {
   return (
@@ -51,20 +52,4 @@ export default function MyTable(props: MyTableProps) {
       </Table>
     </TableContainer>
   )
-}
-
-interface ApiInnerData {
-  activity_name: string
-  attemp_numer: number
-  attempt_type: boolean
-  consistency: string
-  date: string
-  leaderboard_rank: number
-  level: string
-  level_attempt_type: boolean
-  name: string
-  score: number
-}
-interface MyTableProps {
-  data: ApiInnerData[]
 }

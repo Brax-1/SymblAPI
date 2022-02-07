@@ -25,23 +25,11 @@ import {
 import Pagination from '@mui/material/Pagination'
 import Selector from '@components/Elements/selector'
 import MyTable from '@components/Elements/table'
+import {
+  ApiInnerData,
+  filterBox,
+} from '@components/interfaces/dashboardinterface'
 
-export interface ApiInnerData {
-  activity_name: string
-  attemp_numer: number
-  attempt_type: boolean
-  consistency: string
-  date: string
-  leaderboard_rank: number
-  level: string
-  level_attempt_type: boolean
-  name: string
-  score: number
-}
-interface filterBox {
-  search: string
-  sort: string
-}
 const Dashboard = () => {
   const [open, setOpen] = useState(true)
   const [opentrash, setOpentrash] = useState(true)

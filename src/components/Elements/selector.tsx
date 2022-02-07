@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FormControl, MenuItem, Select } from '@material-ui/core'
 import { SelectChangeEvent, styled } from '@mui/material'
+import { MySelectorProps } from '@components/interfaces/dashboardinterface'
 const MyFormatControls = styled(FormControl)({
   width: '200px',
 })
@@ -34,11 +35,4 @@ export default function Selector(props: MySelectorProps) {
       </MySelector>
     </MyFormatControls>
   )
-}
-interface filterBox {
-  search: string
-  sort: string
-}
-interface MySelectorProps {
-  setFilters: (n: filterBox) => void
 }
