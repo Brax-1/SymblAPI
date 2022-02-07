@@ -23,8 +23,10 @@ import {
   Score,
 } from '@material-ui/icons'
 import Pagination from '@mui/material/Pagination'
+import Selector from '@components/Elements/selector'
+import MyTable from '@components/Elements/table'
 
-interface ApiInnerData {
+export interface ApiInnerData {
   activity_name: string
   attemp_numer: number
   attempt_type: boolean
@@ -36,152 +38,28 @@ interface ApiInnerData {
   name: string
   score: number
 }
-
+interface filterBox {
+  search: string
+  sort: string
+}
 const Dashboard = () => {
-  const [open, setOpen] = React.useState(true)
-  const [opentrash, setOpentrash] = React.useState(true)
+  const [open, setOpen] = useState(true)
+  const [opentrash, setOpentrash] = useState(true)
+  const [filters, setFilters] = useState<filterBox>({ search: '', sort: '' })
   const handleClick = (callback: (n: boolean) => void, val: boolean) => {
     callback(!val)
   }
   const [data, setData] = useState<ApiInnerData[]>([])
-  const [sortStatus, setSortStatus] = useState([
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-  ])
-
-  async function SortingData(value: string) {
-    let sortedData = data
-    const sortStatusIni = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    if (value === 'date') {
-      if (sortStatus[1] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.date < y.date ? -1 : 1))
-        )
-      } else if (sortStatus[1] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.date < y.date ? 1 : -1))
-        )
-      sortStatusIni[1] = (sortStatus[1] + 1) % 3
-    } else if (value === 'name') {
-      if (sortStatus[2] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.name < y.name ? -1 : 1))
-        )
-      } else if (sortStatus[2] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.name < y.name ? 1 : -1))
-        )
-      sortStatusIni[2] = (sortStatus[2] + 1) % 3
-    } else if (value === 'activity_name') {
-      if (sortStatus[3] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.activity_name < y.activity_name ? -1 : 1))
-        )
-      } else if (sortStatus[3] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.activity_name < y.activity_name ? 1 : -1))
-        )
-      sortStatusIni[3] = (sortStatus[3] + 1) % 3
-    } else if (value === 'score') {
-      if (sortStatus[4] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.score < y.score ? -1 : 1))
-        )
-      } else if (sortStatus[4] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.score < y.score ? 1 : -1))
-        )
-      sortStatusIni[4] = (sortStatus[4] + 1) % 3
-    } else if (value === 'attempt_type') {
-      if (sortStatus[5] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.attempt_type < y.attempt_type ? -1 : 1))
-        )
-      } else if (sortStatus[5] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.attempt_type < y.attempt_type ? 1 : -1))
-        )
-      sortStatusIni[5] = (sortStatus[5] + 1) % 3
-    } else if (value === 'attemp_numer') {
-      if (sortStatus[6] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.attemp_numer < y.attemp_numer ? -1 : 1))
-        )
-      } else if (sortStatus[6] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.attemp_numer < y.attemp_numer ? 1 : -1))
-        )
-      sortStatusIni[6] = (sortStatus[6] + 1) % 3
-    } else if (value === 'level') {
-      if (sortStatus[7] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.level < y.level ? -1 : 1))
-        )
-      } else if (sortStatus[7] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.level < y.level ? 1 : -1))
-        )
-      sortStatusIni[7] = (sortStatus[7] + 1) % 3
-    } else if (value === 'level_attempt_type') {
-      if (sortStatus[8] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) =>
-            x.level_attempt_type < y.level_attempt_type ? -1 : 1
-          )
-        )
-      } else if (sortStatus[8] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) =>
-            x.level_attempt_type < y.level_attempt_type ? 1 : -1
-          )
-        )
-      sortStatusIni[8] = (sortStatus[8] + 1) % 3
-    } else if (value === 'leaderboard_rank') {
-      if (sortStatus[9] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) =>
-            x.leaderboard_rank < y.leaderboard_rank ? -1 : 1
-          )
-        )
-      } else if (sortStatus[9] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) =>
-            x.leaderboard_rank < y.leaderboard_rank ? 1 : -1
-          )
-        )
-      sortStatusIni[9] = (sortStatus[9] + 1) % 3
-    } else if (value === 'consistency') {
-      if (sortStatus[10] === 0) {
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.consistency < y.consistency ? -1 : 1))
-        )
-      } else if (sortStatus[10] === 1)
-        sortedData = await Promise.all(
-          data.sort((x, y) => (x.consistency < y.consistency ? 1 : -1))
-        )
-      sortStatusIni[10] = (sortStatus[10] + 1) % 3
-    }
-    setData(sortedData)
-    setSortStatus(sortStatusIni)
-  }
-
   async function getData() {
-    const data = ((await QuizApi.tableData()) as unknown) as ApiInnerData[][]
+    const arr = { search: '', sort: '' }
+    arr['search'] = filters.search
+    arr['sort'] = filters.sort
+    const data = ((await QuizApi.tableData(arr)) as unknown) as ApiInnerData[][]
     setData(data[0])
   }
-
   useEffect(() => {
     getData()
-  }, [])
+  }, [filters])
   return (
     <>
       <div className="MainDash">
@@ -296,6 +174,7 @@ const Dashboard = () => {
           <div className="MainDashNavbar">
             <div className="MainDashNavbarCover">
               <div className="MainDashNavbarleft">
+                <Selector setFilters={setFilters} />
                 <div className="SearchFunctionCover">
                   <div className="SearchTextBoxCover">
                     <span>
@@ -327,6 +206,144 @@ const Dashboard = () => {
           </div>
           <div className="MainDashTable">
             <div className="MaintableContent">
+              <MyTable data={data} />
+
+              <div className="Maintablebottom">
+                <Pagination
+                  count={10}
+                  color="standard"
+                  shape="circular"
+                  style={{ color: 'white' }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Dashboard
+
+// async function SortingData(value: string) {
+//   let sortedData = data
+//   const sortStatusIni = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//   if (value === 'date') {
+//     if (sortStatus[1] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.date < y.date ? -1 : 1))
+//       )
+//     } else if (sortStatus[1] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.date < y.date ? 1 : -1))
+//       )
+//     sortStatusIni[1] = (sortStatus[1] + 1) % 3
+//   } else if (value === 'name') {
+//     if (sortStatus[2] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.name < y.name ? -1 : 1))
+//       )
+//     } else if (sortStatus[2] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.name < y.name ? 1 : -1))
+//       )
+//     sortStatusIni[2] = (sortStatus[2] + 1) % 3
+//   } else if (value === 'activity_name') {
+//     if (sortStatus[3] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.activity_name < y.activity_name ? -1 : 1))
+//       )
+//     } else if (sortStatus[3] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.activity_name < y.activity_name ? 1 : -1))
+//       )
+//     sortStatusIni[3] = (sortStatus[3] + 1) % 3
+//   } else if (value === 'score') {
+//     if (sortStatus[4] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.score < y.score ? -1 : 1))
+//       )
+//     } else if (sortStatus[4] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.score < y.score ? 1 : -1))
+//       )
+//     sortStatusIni[4] = (sortStatus[4] + 1) % 3
+//   } else if (value === 'attempt_type') {
+//     if (sortStatus[5] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.attempt_type < y.attempt_type ? -1 : 1))
+//       )
+//     } else if (sortStatus[5] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.attempt_type < y.attempt_type ? 1 : -1))
+//       )
+//     sortStatusIni[5] = (sortStatus[5] + 1) % 3
+//   } else if (value === 'attemp_numer') {
+//     if (sortStatus[6] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.attemp_numer < y.attemp_numer ? -1 : 1))
+//       )
+//     } else if (sortStatus[6] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.attemp_numer < y.attemp_numer ? 1 : -1))
+//       )
+//     sortStatusIni[6] = (sortStatus[6] + 1) % 3
+//   } else if (value === 'level') {
+//     if (sortStatus[7] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.level < y.level ? -1 : 1))
+//       )
+//     } else if (sortStatus[7] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.level < y.level ? 1 : -1))
+//       )
+//     sortStatusIni[7] = (sortStatus[7] + 1) % 3
+//   } else if (value === 'level_attempt_type') {
+//     if (sortStatus[8] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) =>
+//           x.level_attempt_type < y.level_attempt_type ? -1 : 1
+//         )
+//       )
+//     } else if (sortStatus[8] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) =>
+//           x.level_attempt_type < y.level_attempt_type ? 1 : -1
+//         )
+//       )
+//     sortStatusIni[8] = (sortStatus[8] + 1) % 3
+//   } else if (value === 'leaderboard_rank') {
+//     if (sortStatus[9] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) =>
+//           x.leaderboard_rank < y.leaderboard_rank ? -1 : 1
+//         )
+//       )
+//     } else if (sortStatus[9] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) =>
+//           x.leaderboard_rank < y.leaderboard_rank ? 1 : -1
+//         )
+//       )
+//     sortStatusIni[9] = (sortStatus[9] + 1) % 3
+//   } else if (value === 'consistency') {
+//     if (sortStatus[10] === 0) {
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.consistency < y.consistency ? -1 : 1))
+//       )
+//     } else if (sortStatus[10] === 1)
+//       sortedData = await Promise.all(
+//         data.sort((x, y) => (x.consistency < y.consistency ? 1 : -1))
+//       )
+//     sortStatusIni[10] = (sortStatus[10] + 1) % 3
+//   }
+//   setData(sortedData)
+//   setSortStatus(sortStatusIni)
+// }
+
+{
+  /* <div className="MaintableContent">
               <div className="MainTableCover">
                 <table cellSpacing="0">
                   <thead>
@@ -521,12 +538,5 @@ const Dashboard = () => {
                   style={{ color: 'white' }}
                 />
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+            </div> */
 }
-
-export default Dashboard

@@ -91,6 +91,7 @@
   display: flex;
   height: 50%;
   align-items: center;
+  padding-left: 10px;
 }
 
 .SearchFunctionCover {
@@ -188,18 +189,23 @@
     height: 60px;
     border-bottom: 2px solid rgba(0, 189, 199, 0.313);
     background: rgb(0, 189, 199);
-    color: white;
     cursor: pointer;
+}
+.MaintableContent thead tr th{
+  color: white;
 }
 .MaintableContent table tbody tr{
     margin-top: 140px;
     transition: 0.2s ease;
-    height: 50px
+    height: 50px;
+    transition : 0.5s;
 
 }
 .MaintableContent table tbody tr:hover{
-    background: rgb(0, 146, 199);
-    color: white;
+    background: rgb(168, 232, 255);
+}
+.MaintableContent table tbody tr:hover td{
+  color: rgb(0, 189, 199);
 }
 
 .MaintableContent table tbody tr td{
