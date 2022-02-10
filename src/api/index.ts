@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from 'axios'
 
 export enum BASE_URL {
-  API_URL = 'http://localhost:3000',
+  API_URL = 'http://localhost:3001/api/v1/',
+  JSON_URL = 'http://localhost:3006/',
   PROFVED_URL = 'https://profved.com/wp-json/wp/v1',
 }
 
@@ -27,6 +28,13 @@ export default class Http {
     return queryParams
   }
 
+  addTokenToHeader() {
+    if (location.pathname !== '/') {
+      const token = localStorage.getItem('token')
+      this.axiosRequest.defaults.headers.common.Authorization = `Bearer ${token}`
+    }
+  }
+
   httpGet(url: string, params = {}) {
     return new Promise((resolve, reject) => {
       const queryParams = this.makeQueryParams(params)
@@ -34,7 +42,7 @@ export default class Http {
         .get(`${url}${queryParams}`)
         .then((response) => {
           if (response.status === 200)
-            return resolve({ ...response.data, error: false })
+            return resolve({ data: { ...response.data }, error: false })
           return reject({ ...response, error: true })
         })
         .catch((err) => {
@@ -44,14 +52,14 @@ export default class Http {
     })
   }
 
-  httpPost(url: string, params = {}, payload = {}) {
+  httpPost(url: string, params = {}, payload = {}, options = {}) {
     return new Promise((resolve, reject) => {
       const queryParams = this.makeQueryParams(params)
       this.axiosRequest
-        .post(`${url}${queryParams}`, payload)
+        .post(`${url}${queryParams}`, payload, options)
         .then((response) => {
           if (response.status === 200)
-            return resolve({ ...response.data, error: false })
+            return resolve({ data: { ...response.data }, error: false })
           return reject({ ...response, error: true })
         })
         .catch((err) => {
