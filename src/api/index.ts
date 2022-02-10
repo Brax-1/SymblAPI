@@ -59,12 +59,12 @@ export default class Http {
         .post(`${url}${queryParams}`, payload, options)
         .then((response) => {
           if (response.status === 200)
-            return resolve({ ...response.data, error: false })
+            return resolve({ data: { ...response.data }, error: false })
           return reject({ ...response, error: true })
         })
         .catch((err) => {
-          if (err.response) return reject({ ...err.response, error: true })
-          return reject(err)
+          if (err.response) return resolve({ ...err.response, error: true })
+          return resolve({ ...err, data: { code: 404 } })
         })
     })
   }

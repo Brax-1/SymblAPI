@@ -14,15 +14,12 @@ export default function MaterialUIPickers(props: DateAndTime) {
 
   const handleChange = (newValue: Date | null) => {
     setValue(newValue)
-    props.setDateDay(newValue ? newValue.getDate() : CurentDay.getDate())
-    props.setDateMonth(
-      newValue ? newValue.getMonth() : CurentDay.getMonth() + 1
-    )
-    props.setDateYear(
-      newValue ? newValue.getFullYear() : CurentDay.getFullYear()
-    )
-    props.setTimeSlot(newValue ? newValue.getHours() : CurentDay.getFullYear())
-    console.log(newValue ? newValue.getMonth() : '')
+    props.setDateTime({
+      dateDay: newValue ? newValue.getDate() : CurentDay.getDate(),
+      dateMonth: newValue ? newValue.getMonth() : CurentDay.getMonth() + 1,
+      dateYear: newValue ? newValue.getFullYear() : CurentDay.getFullYear(),
+      timeSlot: newValue ? newValue.getHours() : 9,
+    })
   }
 
   return (

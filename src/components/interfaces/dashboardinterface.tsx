@@ -60,21 +60,28 @@ export interface BookDemoPayload {
   ipAddress: string
 }
 export interface loginMessageFormat {
-  code: string | number
   error: boolean
-  msg: string
-  data: { token: string }
+  data: {
+    code: string | number
+    error: boolean
+    msg: string
+    data: { token: string }
+  }
 }
 export interface BookDemoInter {
   code: string | number
   data: { code: string; message: string }
 }
-export interface DateAndTime {
-  setDateDay: (n: number) => void
-  setDateMonth: (n: number) => void
-  setDateYear: (n: number) => void
-  setTimeSlot: (n: number) => void
-}
+
 export interface DemoProps {
   setDemoOpen: (n: boolean) => void
+}
+export interface DateTimeStates {
+  dateDay: number
+  dateMonth: number
+  dateYear: number
+  timeSlot: number
+}
+export interface DateAndTime {
+  setDateTime: (n: DateTimeStates) => void
 }

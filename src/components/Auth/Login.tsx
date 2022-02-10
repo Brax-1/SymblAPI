@@ -1,5 +1,5 @@
 import { Button, Checkbox, LinearProgress } from '@material-ui/core'
-import { Alert } from '@mui/material'
+import { Alert, styled } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import style from '../../style/SignIn.module.css'
@@ -8,7 +8,12 @@ import Image from 'next/image'
 import vedxlogo from '../../images/ved_logo.png'
 import { setTokenInStorge } from 'src/utils/auth'
 import { loginMessageFormat } from 'src/components/interfaces/dashboardinterface'
-
+const MyAlert = styled(Alert)({
+  padding: 8,
+  position: 'absolute',
+  zIndex: 10000,
+  width: '100vw',
+})
 const Login = () => {
   const [loading, setLoading] = useState(false)
   const [showAlert, setShowAlert] = useState(<></>)
@@ -22,23 +27,28 @@ const Login = () => {
       username: userName,
       password: password,
     })) as unknown) as loginMessageFormat
-    if (parsedData.code.toString() === '200') {
+    console.log(parsedData, 'data')
+    if (parsedData.data.code.toString() === '200') {
       setShowAlert(
-        <Alert
+        <MyAlert
           variant="filled"
           severity="success"
           style={{ borderRadius: '0' }}
         >
           Successfully Sign in
-        </Alert>
+        </MyAlert>
       )
-      setTokenInStorge(parsedData.data.token)
+      setTokenInStorge(parsedData.data.data.token)
       router.push('/dashboard')
     } else {
       setShowAlert(
-        <Alert variant="filled" severity="error" style={{ borderRadius: '0' }}>
+        <MyAlert
+          variant="filled"
+          severity="error"
+          style={{ borderRadius: '0' }}
+        >
           Wrong Credentials
-        </Alert>
+        </MyAlert>
       )
       setLoading(false)
     }

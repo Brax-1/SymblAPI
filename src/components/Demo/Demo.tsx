@@ -7,13 +7,27 @@ import {
   BookDemoPayload,
 } from '@components/interfaces/dashboardinterface'
 import DatepickerElement from '@components/Elements/datepicker'
-import { Timezones } from '@components/constants/timezone'
-import { PhoneCodes } from '@components/constants/countrycode'
 import { v4 as uuid } from 'uuid'
 import QuizApi from 'src/api/Quiz'
 import { CircularProgress } from '@material-ui/core'
 import { Alert } from '@mui/material'
 import { DemoProps } from '@components/interfaces/dashboardinterface'
+import { DateTimeStates } from '@components/interfaces/dashboardinterface'
+import { styled } from '@material-ui/core'
+import {
+  PhoneCode,
+  Gender,
+  Grade,
+  Course,
+  TimeZones,
+} from 'src/components/constants/democodes'
+
+const MyAlert = styled(Alert)({
+  padding: 8,
+  position: 'absolute',
+  zIndex: 10000,
+  width: '100%',
+})
 const CurentDay = new Date()
 const Demo = (props: DemoProps) => {
   const [showAlert, setShowAlert] = useState(<></>)
@@ -27,19 +41,16 @@ const Demo = (props: DemoProps) => {
   const [grade, setgrade] = useState('1')
   const [course, setCourse] = useState('mathGenius')
   const [timeZone, setTimezone] = useState('')
-  const [dateDay, setDateDay] = useState(CurentDay.getDate())
-  const [dateMonth, setDateMonth] = useState(CurentDay.getMonth() + 1)
-  const [dateYear, setDateYear] = useState(CurentDay.getFullYear())
-  const [timeSlot, setTimeSlot] = useState(9)
+  const [DateTime, setDateTime] = useState<DateTimeStates>({
+    dateDay: CurentDay.getDate(),
+    dateMonth: CurentDay.getMonth() + 1,
+    dateYear: CurentDay.getFullYear(),
+    timeSlot: 9,
+  })
   const [loading, setLoading] = useState(false)
 
   async function handleClick() {
     setLoading(true)
-    const newDate = new Date()
-    const date = newDate.getDate()
-    const month = newDate.getMonth() + 1
-    const year = newDate.getFullYear()
-    console.log(date, month, year)
     const payload: BookDemoPayload = {
       phoneCode: phoneCode,
       phoneNumber: phoneNumber,
@@ -51,17 +62,16 @@ const Demo = (props: DemoProps) => {
       grade: grade,
       demoCourse: course,
       timezone: timeZone,
-      dateDay: dateDay.toString(),
-      dateMonth: dateMonth.toString(),
-      dateYear: dateYear.toString(),
-      timeslot: timeSlot.toString(),
+      dateDay: DateTime.dateDay.toString(),
+      dateMonth: DateTime.dateMonth.toString(),
+      dateYear: DateTime.dateYear.toString(),
+      timeslot: DateTime.timeSlot.toString(),
       sendEmail: 'false',
       sessionId: uuid(),
       source: 'WEB',
       isAttended: 0,
       ipAddress: '',
     }
-    console.log(payload)
     const url = `demo/bookDemo`
     const parsedData = ((await QuizApi.BookDemo(
       url,
@@ -70,37 +80,11 @@ const Demo = (props: DemoProps) => {
     if (parsedData.code.toString() === '200') {
       props.setDemoOpen(false)
       setShowAlert(
-        <Alert
-          variant="filled"
-          severity="success"
-          style={{
-            borderRadius: '0',
-            position: 'absolute',
-            zIndex: 10000,
-            width: '100vw',
-            background: 'green',
-            color: 'white',
-          }}
-        >
-          Successfully Slot Booked
-        </Alert>
+        <MyAlert severity="success">Successfully Slot Booked</MyAlert>
       )
     } else {
       setShowAlert(
-        <Alert
-          variant="filled"
-          severity="error"
-          style={{
-            borderRadius: '0',
-            position: 'absolute',
-            zIndex: 10000,
-            width: '100vw',
-            background: 'red',
-            color: 'white',
-          }}
-        >
-          Sorry ,Something Went Wrong !!
-        </Alert>
+        <MyAlert severity="error">Sorry ,Something Went Wrong !!</MyAlert>
       )
     }
     setLoading(false)
@@ -108,41 +92,9 @@ const Demo = (props: DemoProps) => {
       setShowAlert(<></>)
     }, 3000)
   }
-  const PhoneCode = PhoneCodes.map((val) => {
-    return { value: val.dial_code, name: `${val.code} (${val.dial_code})` }
-  })
-  const Gender = [
-    { value: 'male', name: 'Male' },
-    { value: 'female', name: 'Female' },
-    { value: 'other', name: 'Other' },
-  ]
-  const Grade = [
-    { value: '1', name: '1' },
-    { value: '2', name: '2' },
-    { value: '3', name: '3' },
-    { value: '4', name: '4' },
-    { value: '5', name: '5' },
-    { value: '6', name: '6' },
-    { value: '7', name: '7' },
-    { value: '8', name: '8' },
-    { value: '9', name: '9' },
-    { value: '10', name: '10' },
-    { value: '11', name: '11' },
-    { value: '12', name: '12' },
-  ]
-  const Course = [
-    { value: 'mathGenius', name: 'Math Genius' },
-    { value: 'superMemory', name: 'Super Memory' },
-  ]
-  const TimeZone = Timezones.map((e) => {
-    return {
-      name: e.text.split(')')[0] + `) ${e.value}`,
-      value: e.text.split(')')[0] + `) ${e.value}`,
-    }
-  })
 
   return (
-    <>
+    <div className="DemoCover">
       {showAlert != <></> ? showAlert : null}
       <div
         className={classes.CrossButton}
@@ -201,19 +153,14 @@ const Demo = (props: DemoProps) => {
             <div className={classes.MainDemoFormFull}>
               <Selector
                 callback={setTimezone}
-                data={TimeZone}
+                data={TimeZones}
                 title="Time Zone"
               />
             </div>
           </div>
           <div className={classes.MainDemoFormCover}>
             <div className={classes.MainDemoFormFull}>
-              <DatepickerElement
-                setDateDay={setDateDay}
-                setDateMonth={setDateMonth}
-                setDateYear={setDateYear}
-                setTimeSlot={setTimeSlot}
-              />
+              <DatepickerElement setDateTime={setDateTime} />
             </div>
           </div>
           <div className={classes.MainDemoFormCover}>
@@ -226,7 +173,7 @@ const Demo = (props: DemoProps) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
