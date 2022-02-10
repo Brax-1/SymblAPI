@@ -18,5 +18,63 @@ export interface filterBox {
   sort: string
 }
 export interface MySelectorProps {
-  setFilters: (n: filterBox) => void
+  callback: (n: string) => void
+  data: { value: string; name: string }[]
+  title: string
+}
+export interface MyInputProps {
+  callback: (n: string) => void
+  data: string
+}
+export interface MyChipProp {
+  callback: (n: string) => void
+  data: { value: string; name: string }[]
+  title: string
+  current: string
+}
+export enum Attendance {
+  SCHEDULED,
+  PRESENT,
+  ABSENT,
+  RESCHEDULED,
+}
+export interface BookDemoPayload {
+  phoneCode: string
+  phoneNumber: string
+  parentFirstName: string
+  parentLastName: string
+  parentGender: string
+  parentEmail: string
+  childName: string
+  grade: string
+  demoCourse: string
+  timezone: string
+  dateDay: string
+  dateMonth: string
+  dateYear: string
+  timeslot: string
+  sendEmail: string
+  sessionId: string
+  source: string
+  isAttended: Attendance
+  ipAddress: string
+}
+export interface loginMessageFormat {
+  code: string | number
+  error: boolean
+  msg: string
+  data: { token: string }
+}
+export interface BookDemoInter {
+  code: string | number
+  data: { code: string; message: string }
+}
+export interface DateAndTime {
+  setDateDay: (n: number) => void
+  setDateMonth: (n: number) => void
+  setDateYear: (n: number) => void
+  setTimeSlot: (n: number) => void
+}
+export interface DemoProps {
+  setDemoOpen: (n: boolean) => void
 }

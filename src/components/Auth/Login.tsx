@@ -7,14 +7,8 @@ import QuizApi from 'src/api/Quiz'
 import Image from 'next/image'
 import vedxlogo from '../../images/ved_logo.png'
 import { setTokenInStorge } from 'src/utils/auth'
+import { loginMessageFormat } from 'src/components/interfaces/dashboardinterface'
 let showAlert = <></>
-
-interface loginMessageFormat {
-  code: string | number
-  error: boolean
-  msg: string
-  data: any
-}
 
 const Login = () => {
   const [loading, setLoading] = useState(false)

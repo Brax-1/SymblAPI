@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react'
 import QuizApi from 'src/api/Quiz'
 import {
   List,
-  ListItem,
   ListItemText,
   ListItemIcon,
   Collapse,
   Badge,
-  Fab,
 } from '@material-ui/core'
 import {
   Send,
-  ChatBubbleOutlineOutlined,
   Drafts,
+  Email,
   Inbox,
   Settings,
   OutlinedFlag,
@@ -22,34 +20,47 @@ import {
   AccountBox,
   Score,
 } from '@material-ui/icons'
+
 import Pagination from '@mui/material/Pagination'
 import Selector from '@components/Elements/selector'
 import MyTable from '@components/Elements/table'
-import {
-  ApiInnerData,
-  filterBox,
-} from '@components/interfaces/dashboardinterface'
+import { ApiInnerData } from '@components/interfaces/dashboardinterface'
+import Demo from '@components/Demo/Demo'
+import { ListItemButton } from '@mui/material'
 
 const Dashboard = () => {
   const [open, setOpen] = useState(true)
   const [opentrash, setOpentrash] = useState(true)
-  const [filters, setFilters] = useState<filterBox>({ search: '', sort: '' })
+  const [filterSort, setFilterSort] = useState<string>('')
+  const [DemoOpen, setDemoOpen] = useState(false)
+  const [demoBookbutton, setBookDemoButton] = useState(false)
+  const filterSelector = [
+    { value: 'serial_No', name: 'Serial No' },
+    { value: 'date', name: 'Date' },
+    { value: 'name', name: 'St Name' },
+    { value: 'ac_Name', name: 'Activity Name' },
+    { value: 'score', name: 'Score' },
+    { value: 'at_Type', name: 'Attempt Type' },
+    { value: '10', name: 'Attempt Number' },
+  ]
   const handleClick = (callback: (n: boolean) => void, val: boolean) => {
     callback(!val)
   }
   const [data, setData] = useState<ApiInnerData[]>([])
   async function getData() {
     const arr = { search: '', sort: '' }
-    arr['search'] = filters.search
-    arr['sort'] = filters.sort
+    arr['search'] = filterSort
+    arr['sort'] = ''
     const data = ((await QuizApi.tableData(arr)) as unknown) as ApiInnerData[][]
     setData(data[0])
   }
   useEffect(() => {
     getData()
-  }, [filters])
+  }, [filterSort])
   return (
     <>
+      {DemoOpen ? <Demo setDemoOpen={setDemoOpen} /> : null}
+
       <div className="MainDash">
         <div className="MainDashLeft">
           <List
@@ -63,63 +74,56 @@ const Dashboard = () => {
                 VEDX <span>Solutions</span>
               </div>
             </div>
-            <ListItem button className="ListItemButton">
+            <ListItemButton className="ListItemButton">
               <ListItemIcon>
                 <Send />
               </ListItemIcon>
               <ListItemText className="ListItemText" primary="Sent mail" />
-            </ListItem>
-            <ListItem button>
+            </ListItemButton>
+            <ListItemButton>
               <ListItemIcon>
                 <Drafts />
               </ListItemIcon>
               <ListItemText primary="Drafts" />
-            </ListItem>
-            <ListItem button>
+            </ListItemButton>
+            <ListItemButton>
               <ListItemIcon>
                 <AccountBox />
               </ListItemIcon>
               <ListItemText primary="Account" />
-            </ListItem>
-            <ListItem button>
+            </ListItemButton>
+            <ListItemButton>
               <ListItemIcon>
                 <Score />
               </ListItemIcon>
               <ListItemText primary="Score" />
-            </ListItem>
-            <ListItem button onClick={() => handleClick(setOpen, open)}>
+            </ListItemButton>
+            <ListItemButton onClick={() => handleClick(setOpen, open)}>
               <ListItemIcon>
                 <Inbox />
               </ListItemIcon>
-              <ListItemText primary="Inbox" />
+              <ListItemText primary="Analysis" />
               {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
+            </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem button>
+                <ListItemButton>
                   <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Starred" />
-                </ListItem>
-                <ListItem button>
+                  <ListItemText
+                    primary="Quiz"
+                    onClick={() => setBookDemoButton(false)}
+                  />
+                </ListItemButton>
+                <ListItemButton>
                   <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Pls Open" />
-                </ListItem>
-                <ListItem button>
-                  <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Read All" />
-                </ListItem>
-                <ListItem button>
-                  <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Read Selected" />
-                </ListItem>
-                <ListItem button>
-                  <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Read None" />
-                </ListItem>
+                  <ListItemText
+                    primary="Demo"
+                    onClick={() => setBookDemoButton(true)}
+                  />
+                </ListItemButton>
               </List>
             </Collapse>
-            <ListItem
-              button
+            <ListItemButton
               onClick={() => handleClick(setOpentrash, opentrash)}
             >
               <ListItemIcon>
@@ -127,42 +131,48 @@ const Dashboard = () => {
               </ListItemIcon>
               <ListItemText primary="Trash" />
               {opentrash ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
+            </ListItemButton>
             <Collapse in={opentrash} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem button>
+                <ListItemButton>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="Clear" />
-                </ListItem>
-                <ListItem button>
+                </ListItemButton>
+                <ListItemButton>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="Read All" />
-                </ListItem>
-                <ListItem button>
+                </ListItemButton>
+                <ListItemButton>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="Spam" />
-                </ListItem>
+                </ListItemButton>
               </List>
             </Collapse>
-            <ListItem button>
+            <ListItemButton>
               <ListItemIcon>
                 <Settings />
               </ListItemIcon>
               <ListItemText primary="Setting" />
-            </ListItem>
-            <ListItem button>
+            </ListItemButton>
+            <ListItemButton>
               <ListItemIcon>
                 <OutlinedFlag />
               </ListItemIcon>
               <ListItemText primary="Sign Out" />
-            </ListItem>
+            </ListItemButton>
           </List>
         </div>
         <div className="MaindashRight">
           <div className="MainDashNavbar">
             <div className="MainDashNavbarCover">
               <div className="MainDashNavbarleft">
-                <Selector setFilters={setFilters} />
+                <div className="MainDashFilterSelector">
+                  <Selector
+                    callback={setFilterSort}
+                    data={filterSelector}
+                    title="Filter"
+                  />
+                </div>
                 <div className="SearchFunctionCover">
                   <div className="SearchTextBoxCover">
                     <span>
@@ -175,20 +185,21 @@ const Dashboard = () => {
                     />
                   </div>
                   <button className="SearchButton">Search</button>
+                  {demoBookbutton ? (
+                    <button
+                      className="BookDemoButton"
+                      onClick={() => setDemoOpen(true)}
+                    >
+                      Book Demo Quiz
+                    </button>
+                  ) : null}
                 </div>
               </div>
               <div className="MainDashNavbarRight">
                 <Badge badgeContent={4} color="primary">
-                  <ChatBubbleOutlineOutlined color="action" />
+                  <Email color="action" />
                 </Badge>
                 <div className="ProfileSpacer"></div>
-                <Fab
-                  style={{ background: 'rgb(0, 189, 199)', color: 'white' }}
-                  aria-label="edit"
-                  size="medium"
-                >
-                  <i className="fas fa-user-alt"></i>
-                </Fab>
               </div>
             </div>
           </div>

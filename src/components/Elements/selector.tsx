@@ -1,38 +1,45 @@
-import React, { useState } from 'react'
-import { FormControl, MenuItem, Select } from '@material-ui/core'
-import { SelectChangeEvent, styled } from '@mui/material'
+import * as React from 'react'
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
+import Autocomplete from '@mui/material/Autocomplete'
 import { MySelectorProps } from '@components/interfaces/dashboardinterface'
-const MyFormatControls = styled(FormControl)({
-  width: '200px',
-})
-const MySelector = styled(Select)({
-  textAlign: 'center',
-})
-export default function Selector(props: MySelectorProps) {
-  const [age, setAge] = useState<string>('Apply Filter')
-
-  const handleChange = (event: SelectChangeEvent) => {
-    props.setFilters({ search: '', sort: event.target.value })
-    setAge(event.target.value)
+import { SelectChangeEvent } from '@mui/material'
+export default function CountrySelect(props: MySelectorProps) {
+  function handleChange(event: SelectChangeEvent) {
+    const target = event.target as Element
+    const data: string = target.textContent ? target.textContent : ''
+    props.callback(data)
   }
   return (
-    <MyFormatControls variant="standard">
-      <MySelector
-        id="demo-simple-select-standard"
-        value={age}
+    <div style={{ width: '100%' }}>
+      <div>{props.title}</div>
+      <Autocomplete
+        id="country-select-demo"
+        sx={{ width: '100%' }}
+        options={props.data}
+        autoHighlight
+        getOptionLabel={(option) => option.name}
+        renderOption={(props, option) => (
+          <Box
+            component="li"
+            sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+            {...props}
+          >
+            {option.name}
+          </Box>
+        )}
         onChange={(e) => handleChange((e as unknown) as SelectChangeEvent)}
-      >
-        <MenuItem value={'Apply Filter'}>
-          <em>No Filter</em>
-        </MenuItem>
-        <MenuItem value={'serial_No'}>Serial No</MenuItem>
-        <MenuItem value={'date'}>Date</MenuItem>
-        <MenuItem value={'name'}>St Name</MenuItem>
-        <MenuItem value={'ac_Name'}>Activity Name</MenuItem>
-        <MenuItem value={'score'}>Score</MenuItem>
-        <MenuItem value={'at_Type'}>Attempt Type</MenuItem>
-        <MenuItem value={30}>Attempt Number</MenuItem>
-      </MySelector>
-    </MyFormatControls>
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            inputProps={{
+              ...params.inputProps,
+              autoComplete: 'new-password',
+            }}
+            placeholder={props.title}
+          />
+        )}
+      />
+    </div>
   )
 }

@@ -15,7 +15,7 @@ export default function MyTable(props: MyTableProps) {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>SERIAL NOh</TableCell>
+            <TableCell>SERIAL NO</TableCell>
             <TableCell align="center">DATE</TableCell>
             <TableCell align="center">STUDENT NAME</TableCell>
             <TableCell align="center">ACTIVITY NAME</TableCell>
