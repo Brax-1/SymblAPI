@@ -118,3 +118,44 @@
     width: 50%;
     box-shadow: none;
 }
+@media (max-width: 1400px) {
+  .MainDemoForm{
+    width: 90%;
+  }
+  .CrossButton{
+    right: 6%;
+  }
+}
+@media (max-width: 900px) {
+  .MainDemoForm{
+    padding: 2%;
+    width: 98%;
+    
+  }
+}
+@media (max-width: 700px) {
+  .MainDemoFormCover{
+      flex-direction: column;
+  }
+  .MainDemoFormQuarter1 {
+    width: 100%;
+  }
+  .MainDemoFormQuarter3 {
+    width: 100%;
+  }
+  .MainDemoFormQuarterGrade {
+    width: 100%;
+  }
+  .MainDemoFormQuarterCourse {
+    width: 100%;
+  }
+  .MainDemoFormHalf {
+    width: 100%;
+  }
+  .SubmitButton{
+    width: 80%;
+  }
+  .SubmitButton:hover{
+    width: 80%;
+  }
+}

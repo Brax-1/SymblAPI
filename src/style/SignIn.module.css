@@ -15,10 +15,10 @@
   display: flex;
   flex-direction: column;
 }
-.LoginDataCover{
-    display: flex;
-    width: 100%;
-    height: 90%;
+.LoginDataCover {
+  display: flex;
+  width: 100%;
+  height: 90%;
 }
 .LoginLeftCover {
   width: 60%;
@@ -35,40 +35,80 @@
   justify-content: center;
 }
 .LoginSignInText {
-    font-weight: 900;
-    font-size: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    color: rgb(0, 189, 199);
+  font-weight: 900;
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: rgb(0, 189, 199);
 }
-.LoginInputCover {
+.LoginInputTitle {
+  margin: 10px 0;
+  font-size: 14px;
 }
-.LoginInputTitle{
-    margin: 10px 0;
-    font-size: 14px;
+.LoginInputAreaCover {
+  border: 1px solid rgba(128, 128, 128, 0.435);
+  width: 80%;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  color: grey;
 }
-.LoginInputAreaCover{
-    border: 1px solid rgba(128, 128, 128, 0.435);
+.LoginInputAreaCover:hover {
+  border: 1px solid rgb(0, 189, 199);
+  color: rgb(0, 189, 199);
+  box-shadow: 0px 0px 5px 0px rgb(0, 189, 199);
+}
+.LoginInputArea {
+  outline: none;
+  border: none;
+}
+.LoginInputArea:focus {
+  color: rgb(0, 189, 199);
+}
+.LoginRememberMe {
+  margin-top: 10px;
+  font-size: 12px;
+  color: grey;
+}
+.ButtonCover {
+  width: 80%;
+}
+@media (max-width: 1300px) {
+  .LoginCover {
     width: 80%;
-    border-radius: 50px;
-    display: flex;
+    height: 60%;
+  }
+}
+@media (max-width: 900px) {
+  .LoginCover {
+    width: 60%;
+  }
+  .LoginLeftCover {
+    height: auto;
+  }
+  .LoginDataCover {
+    flex-direction: column;
     align-items: center;
-    color: grey;
+    justify-content: center;
+  }
+  .LoginInputAreaCover {
+    width: 100%;
+  }
+  .LoginInputCover {
+    width: 100%;
+  }
+  .LoginRightCover {
+    width: 70%;
+    align-items: center;
+    justify-content: start;
+  }
 }
-.LoginInputAreaCover:hover{
-    border: 1px solid rgb(0, 189, 199);
-    color: rgb(0, 189, 199);
-    box-shadow: 0px 0px 5px 0px rgb(0, 189, 199);
-}
-.LoginInputArea{
-    outline: none;
-    border: none;
-}
-.LoginInputArea:focus{
-    color: rgb(0, 189, 199);
-}
-.LoginRememberMe{
-    margin-top: 10px;
-    font-size: 12px;
-    color: grey;
+@media (max-width: 600px) {
+  .LoginCover {
+    width: 95%;
+    height: 95%;
+  }
+  .ButtonCover {
+    width: 100%;
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import QuizApi from 'src/api/Quiz'
 import { Badge } from '@material-ui/core'
-import { Email } from '@material-ui/icons'
+import { Email, Book } from '@material-ui/icons'
 
 import Pagination from '@mui/material/Pagination'
 import Selector from '@components/Elements/selector'
@@ -11,6 +11,7 @@ import Demo from '@components/Demo/Demo'
 import Navbar from './navbar'
 
 const DemoComponent = () => {
+  const [windowWidth, setWindowWidth] = useState(1400)
   const [filterSort, setFilterSort] = useState<string>('')
   const [DemoOpen, setDemoOpen] = useState(false)
   const filterSelector = [
@@ -37,6 +38,9 @@ const DemoComponent = () => {
     }
   }
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setWindowWidth(window.innerWidth)
+    }
     getData()
   }, [])
   return (
@@ -65,10 +69,14 @@ const DemoComponent = () => {
                   </div>
                   <button className="SearchButton">Search</button>
                   <button
-                    className="BookDemoButton"
+                    className={`${
+                      windowWidth < 900
+                        ? 'FloaterBookDemoButton'
+                        : 'BookDemoButton'
+                    }`}
                     onClick={() => setDemoOpen(true)}
                   >
-                    Book Demo Quiz
+                    {windowWidth < 900 ? <Book /> : 'Book Demo Quiz'}
                   </button>
                 </div>
               </div>
@@ -86,7 +94,7 @@ const DemoComponent = () => {
 
               <div className="Maintablebottom">
                 <Pagination
-                  count={10}
+                  count={3}
                   color="standard"
                   shape="circular"
                   style={{ color: 'white' }}

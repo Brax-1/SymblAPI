@@ -118,7 +118,7 @@ const Demo = (props: DemoProps) => {
             </div>
           </div>
           <div className={classes.MainDemoFormCover}>
-            <div className={classes.MainDemoFormQuarter3}>
+            <div className={classes.MainDemoFormHalf}>
               <InputField callback={setchildName} data={'Child Name'} />
             </div>
             <div className={classes.MainDemoFormQuarterGrade}>

@@ -76,7 +76,7 @@ const QuizComponent = () => {
 
               <div className="Maintablebottom">
                 <Pagination
-                  count={10}
+                  count={2}
                   color="standard"
                   shape="circular"
                   style={{ color: 'white' }}

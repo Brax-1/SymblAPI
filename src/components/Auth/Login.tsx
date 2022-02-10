@@ -75,7 +75,7 @@ const Login = () => {
           {loading ? <LinearProgress style={{ width: '100%' }} /> : null}
           <div className={style.LoginDataCover}>
             <div className={style.LoginLeftCover}>
-              <div style={{ width: '70%', height: '80%' }}>
+              <div style={{ width: '70%' }}>
                 <Image src={vedxlogo} alt="fill" />
               </div>
             </div>
@@ -115,19 +115,21 @@ const Login = () => {
                 <Checkbox disabled />
                 Remember Me
               </div>
-              <Button
-                variant="contained"
-                style={{
-                  width: '80%',
-                  background: 'rgb(0, 189, 199)',
-                  color: 'white',
-                  marginTop: '10px',
-                  borderRadius: '50px',
-                }}
-                onClick={() => handleLogin()}
-              >
-                Sign In With ProfVed
-              </Button>
+              <div className={style.ButtonCover}>
+                <Button
+                  variant="contained"
+                  style={{
+                    width: '100%',
+                    background: 'rgb(0, 189, 199)',
+                    color: 'white',
+                    marginTop: '10px',
+                    borderRadius: '50px',
+                  }}
+                  onClick={() => handleLogin()}
+                >
+                  Sign In With ProfVed
+                </Button>
+              </div>
             </div>
           </div>
         </div>
