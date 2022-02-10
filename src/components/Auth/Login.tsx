@@ -23,34 +23,47 @@ const Login = () => {
   async function handleLogin() {
     setLoading(true)
     const url = `profved/login`
-    const parsedData = ((await QuizApi.loginAuth(url, {
-      username: userName,
-      password: password,
-    })) as unknown) as loginMessageFormat
-    console.log(parsedData, 'data')
-    if (parsedData.data.code.toString() === '200') {
-      setShowAlert(
-        <MyAlert
-          variant="filled"
-          severity="success"
-          style={{ borderRadius: '0' }}
-        >
-          Successfully Sign in
-        </MyAlert>
-      )
-      setTokenInStorge(parsedData.data.data.token)
-      router.push('/dashboard')
-    } else {
+    try {
+      const parsedData = ((await QuizApi.loginAuth(url, {
+        username: userName,
+        password: password,
+      })) as unknown) as loginMessageFormat
+      if (parsedData.data.code.toString() === '200') {
+        setShowAlert(
+          <MyAlert
+            variant="filled"
+            severity="success"
+            style={{ borderRadius: '0' }}
+          >
+            Successfully Sign in
+          </MyAlert>
+        )
+        setTokenInStorge(parsedData.data.data.token)
+        router.push('/dashboard')
+      } else {
+        setShowAlert(
+          <MyAlert
+            variant="filled"
+            severity="error"
+            style={{ borderRadius: '0' }}
+          >
+            Wrong Credentials
+          </MyAlert>
+        )
+        setLoading(false)
+      }
+    } catch (error) {
       setShowAlert(
         <MyAlert
           variant="filled"
           severity="error"
           style={{ borderRadius: '0' }}
         >
-          Wrong Credentials
+          Something Went Wrong !!
         </MyAlert>
       )
       setLoading(false)
+      console.log(error, 'error')
     }
   }
 

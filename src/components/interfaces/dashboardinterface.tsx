@@ -19,8 +19,8 @@ export interface filterBox {
 }
 export interface MySelectorProps {
   callback: (n: string) => void
-  data: { value: string; name: string }[]
-  title: string
+  data: { value: string; name: string; key?: string }[]
+  title?: string
 }
 export interface MyInputProps {
   callback: (n: string) => void

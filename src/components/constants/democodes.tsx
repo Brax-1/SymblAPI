@@ -27,8 +27,9 @@ export const Course = [
   { value: 'mathGenius', name: 'Math Genius' },
   { value: 'superMemory', name: 'Super Memory' },
 ]
-export const TimeZones = TimeZone.map((e) => {
+export const TimeZones = TimeZone.map((e, index) => {
   return {
+    key: index.toString(),
     name: e.text.split(')')[0] + `) ${e.value}`,
     value: e.text.split(')')[0] + `) ${e.value}`,
   }

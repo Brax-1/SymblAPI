@@ -12,7 +12,7 @@ export default function CountrySelect(props: MySelectorProps) {
   }
   return (
     <div style={{ width: '100%' }}>
-      <div>{props.title}</div>
+      {props.title ? <div>{props.title}</div> : null}
       <Autocomplete
         id="country-select-demo"
         sx={{ width: '100%' }}
@@ -21,6 +21,7 @@ export default function CountrySelect(props: MySelectorProps) {
         getOptionLabel={(option) => option.name}
         renderOption={(props, option) => (
           <Box
+            key={option?.key}
             component="li"
             sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
             {...props}
