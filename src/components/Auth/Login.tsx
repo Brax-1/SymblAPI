@@ -8,10 +8,10 @@ import Image from 'next/image'
 import vedxlogo from '../../images/ved_logo.png'
 import { setTokenInStorge } from 'src/utils/auth'
 import { loginMessageFormat } from 'src/components/interfaces/dashboardinterface'
-let showAlert = <></>
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
+  const [showAlert, setShowAlert] = useState(<></>)
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
@@ -23,7 +23,7 @@ const Login = () => {
       password: password,
     })) as unknown) as loginMessageFormat
     if (parsedData.code.toString() === '200') {
-      showAlert = (
+      setShowAlert(
         <Alert
           variant="filled"
           severity="success"
@@ -34,8 +34,8 @@ const Login = () => {
       )
       setTokenInStorge(parsedData.data.token)
       router.push('/dashboard')
-    } else if (parsedData.code.toString() === '401') {
-      showAlert = (
+    } else {
+      setShowAlert(
         <Alert variant="filled" severity="error" style={{ borderRadius: '0' }}>
           Wrong Credentials
         </Alert>

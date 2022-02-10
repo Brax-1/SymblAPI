@@ -14,9 +14,9 @@ import QuizApi from 'src/api/Quiz'
 import { CircularProgress } from '@material-ui/core'
 import { Alert } from '@mui/material'
 import { DemoProps } from '@components/interfaces/dashboardinterface'
-let showAlert = <></>
 const CurentDay = new Date()
 const Demo = (props: DemoProps) => {
+  const [showAlert, setShowAlert] = useState(<></>)
   const [phoneCode, setPhoneCode] = useState('91')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [pfirstname, setPfirstname] = useState('')
@@ -69,7 +69,7 @@ const Demo = (props: DemoProps) => {
     )) as unknown) as BookDemoInter
     if (parsedData.code.toString() === '200') {
       props.setDemoOpen(false)
-      showAlert = (
+      setShowAlert(
         <Alert
           variant="filled"
           severity="success"
@@ -86,7 +86,7 @@ const Demo = (props: DemoProps) => {
         </Alert>
       )
     } else {
-      showAlert = (
+      setShowAlert(
         <Alert
           variant="filled"
           severity="error"
@@ -105,7 +105,7 @@ const Demo = (props: DemoProps) => {
     }
     setLoading(false)
     setTimeout(() => {
-      showAlert = <></>
+      setShowAlert(<></>)
     }, 3000)
   }
   const PhoneCode = PhoneCodes.map((val) => {
