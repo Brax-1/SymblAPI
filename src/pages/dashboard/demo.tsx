@@ -1,8 +1,8 @@
 import DemoComponent from '@components/DashBoard/democomponent'
 import React from 'react'
 
-const demo = () => {
+const Demo = () => {
   return <DemoComponent />
 }
 
-export default demo
+export default Demo

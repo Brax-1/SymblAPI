@@ -7,7 +7,7 @@ import QuizApi from 'src/api/Quiz'
 import Image from 'next/image'
 import vedxlogo from '../../images/ved_logo.png'
 import { setTokenInStorge } from 'src/utils/auth'
-import { loginMessageFormat } from 'src/components/interfaces/dashboardinterface'
+import { LoginMessageFormat } from 'src/components/interfaces/dashboardinterface'
 const MyAlert = styled(Alert)({
   padding: 8,
   position: 'absolute',
@@ -27,7 +27,7 @@ const Login = () => {
       const parsedData = ((await QuizApi.loginAuth(url, {
         username: userName,
         password: password,
-      })) as unknown) as loginMessageFormat
+      })) as unknown) as LoginMessageFormat
       if (parsedData.data.code.toString() === '200') {
         setShowAlert(
           <MyAlert

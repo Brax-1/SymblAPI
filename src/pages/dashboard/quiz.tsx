@@ -1,8 +1,8 @@
 import QuizComponent from '@components/DashBoard/quiz'
 import React from 'react'
 
-const quiz = () => {
+const Quiz = () => {
   return <QuizComponent />
 }
 
-export default quiz
+export default Quiz

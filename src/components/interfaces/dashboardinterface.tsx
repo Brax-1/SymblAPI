@@ -13,7 +13,7 @@ export interface ApiInnerData {
 export interface MyTableProps {
   data: ApiInnerData[]
 }
-export interface filterBox {
+export interface FilterBox {
   search: string
   sort: string
 }
@@ -59,7 +59,7 @@ export interface BookDemoPayload {
   isAttended: Attendance
   ipAddress: string
 }
-export interface loginMessageFormat {
+export interface LoginMessageFormat {
   error: boolean
   data: {
     code: string | number

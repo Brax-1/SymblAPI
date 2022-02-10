@@ -24,6 +24,9 @@
   justify-content: start;
   align-items: center;
 }
+.NavbarLogo{
+  height: 100%;
+}
 .MainLogoName {
   margin: 20px;
   margin-top: 10px;

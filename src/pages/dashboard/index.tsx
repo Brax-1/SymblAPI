@@ -1,7 +1,7 @@
 import HomeComponent from '@components/DashBoard/home'
 import React from 'react'
-const index = () => {
+const Index = () => {
   return <HomeComponent />
 }
 
-export default index
+export default Index

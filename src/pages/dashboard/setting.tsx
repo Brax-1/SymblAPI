@@ -1,8 +1,8 @@
 import SettingComponent from '@components/DashBoard/setting'
 import React from 'react'
 
-const setting = () => {
+const Setting = () => {
   return <SettingComponent />
 }
 
-export default setting
+export default Setting
