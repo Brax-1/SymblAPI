@@ -11,7 +11,8 @@ import {
 import Demo from '@components/Demo/Demo'
 import { ListItemButton } from '@mui/material'
 import { useRouter } from 'next/router'
-
+import vedxlogo from '../../images/ved_logo.png'
+import Image from 'next/image'
 const Navbar = () => {
   const router = useRouter()
   const [open, setOpen] = useState(true)
@@ -30,7 +31,7 @@ const Navbar = () => {
           aria-labelledby="nested-list-subheader"
         >
           <div className="LogoCover">
-            <i className="fab fa-slack MainLogoNavbar"></i>
+            <Image src={vedxlogo} height="50px" width="40px" />
             <div className="MainLogoName">
               VEDX <span>Solutions</span>
             </div>

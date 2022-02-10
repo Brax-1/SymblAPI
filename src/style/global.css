@@ -23,13 +23,17 @@
   display: flex;
   justify-content: start;
   align-items: center;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.LogoCover span{
+  margin-right: 10px !important;
 }
 .NavbarLogo{
   height: 100%;
 }
 .MainLogoName {
-  margin: 20px;
-  margin-top: 10px;
   font-size: 25px;
   color: rgb(105, 105, 105);
   margin-left: 0px;
