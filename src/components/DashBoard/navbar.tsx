@@ -31,7 +31,6 @@ const Navbar = () => {
     setValue(newValue)
     return event
   }
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setWindowWidth(window.innerWidth)
@@ -96,41 +95,43 @@ const Navbar = () => {
           </List>
         </div>
       ) : (
-        <BottomNavigation
-          sx={{ width: '100vw' }}
-          value={value}
-          onChange={handleChange}
-        >
-          <BottomNavigationAction
-            onClick={() => router.push('/dashboard')}
-            label="Home"
-            value="Home"
-            icon={<Home />}
-          />
-          <BottomNavigationAction
-            onClick={() => router.push('/dashboard/demo')}
-            label="Demo"
-            value="Demo"
-            icon={<Book />}
-          />
-          <BottomNavigationAction
-            onClick={() => router.push('/dashboard/quiz')}
-            label="Quiz"
-            value="Quiz"
-            icon={<QuestionAnswer />}
-          />
-          <BottomNavigationAction
-            onClick={() => router.push('/dashboard/setting')}
-            label="Setting"
-            value="Setting"
-            icon={<Settings />}
-          />
-          <BottomNavigationAction
-            label="LogOut"
-            value="LogOut"
-            icon={<OutlinedFlag />}
-          />
-        </BottomNavigation>
+        <div className="MainDashLeft">
+          <BottomNavigation
+            sx={{ width: '100vw' }}
+            value={value}
+            onChange={handleChange}
+          >
+            <BottomNavigationAction
+              onClick={() => router.push('/dashboard')}
+              label="Home"
+              value="Home"
+              icon={<Home />}
+            />
+            <BottomNavigationAction
+              onClick={() => router.push('/dashboard/demo')}
+              label="Demo"
+              value="Demo"
+              icon={<Book />}
+            />
+            <BottomNavigationAction
+              onClick={() => router.push('/dashboard/quiz')}
+              label="Quiz"
+              value="Quiz"
+              icon={<QuestionAnswer />}
+            />
+            <BottomNavigationAction
+              onClick={() => router.push('/dashboard/setting')}
+              label="Setting"
+              value="Setting"
+              icon={<Settings />}
+            />
+            <BottomNavigationAction
+              label="LogOut"
+              value="LogOut"
+              icon={<OutlinedFlag />}
+            />
+          </BottomNavigation>
+        </div>
       )}
     </>
   )

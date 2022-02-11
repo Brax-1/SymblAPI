@@ -7,7 +7,7 @@
 }
 ::-webkit-scrollbar {
   width: 0em;
-  height: 0.3em;
+  height: 0.4em;
 }
 ::-webkit-scrollbar-button {
   display: none;
@@ -27,10 +27,10 @@
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.LogoCover span{
+.LogoCover span {
   margin-right: 10px !important;
 }
-.NavbarLogo{
+.NavbarLogo {
   height: 100%;
 }
 .MainLogoName {
@@ -52,6 +52,15 @@
   height: 100vh;
   display: flex;
 }
+.MainDashLeft button {
+  background: rgb(31, 31, 31);
+}
+.MainDashLeft button svg {
+  color: white;
+}
+.MainDashLeft button span {
+  color: white;
+}
 .MainDashLeft {
   width: 15%;
   height: 100%;
@@ -65,6 +74,7 @@
   background-color: rgba(197, 197, 197, 0.183);
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
 
 .MainDashLeftDetail {
@@ -77,7 +87,7 @@
 }
 .MainDashNavbar {
   width: 100%;
-  height: 10%;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -88,7 +98,7 @@
 .MainDashNavbarCover {
   margin-top: 1%;
   width: 98%;
-  height: 95%;
+  height: 80px;
   display: flex;
   background: white;
   align-items: center;
@@ -168,13 +178,18 @@
   height: 90%;
   margin-top: 20px;
 }
+.MaintableDemoContent {
+  width: 95%;
+  height: 90%;
+  margin-top: 20px;
+}
 .Maintablebottom {
   width: 100%;
   height: fit-content;
   padding: 10px;
-  background: rgb(0, 189, 199);
+  background: rgb(255, 255, 255);
   width: 100%;
-  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   box-shadow: 0px 0px 5px -3px black;
@@ -194,7 +209,24 @@
   border-top-right-radius: 10px;
   table-layout: fixed;
 }
+.MaintableDemoContent table {
+  width: 250%;
+  background: white;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  table-layout: fixed;
+}
+.MaintableDemoContent .tablecontainer {
+  height: 95%;
+}
 .MaintableContent thead {
+  height: 60px;
+  border-bottom: 2px solid rgba(0, 189, 199, 0.313);
+  background: rgb(0, 189, 199);
+  cursor: pointer;
+}
+.MaintableDemoContent thead {
   height: 60px;
   border-bottom: 2px solid rgba(0, 189, 199, 0.313);
   background: rgb(0, 189, 199);
@@ -202,7 +234,104 @@
 }
 .MaintableContent thead tr th {
   color: white;
+  text-align: center;
 }
+.MaintableDemoContent thead tr th {
+  color: white;
+  text-align: center;
+  padding: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.MaintableContent thead tr th:nth-child(1) {
+  width: 7%;
+}
+.MaintableContent thead tr th:nth-child(2) {
+  width: 9%;
+}
+.MaintableContent thead tr th:nth-child(3) {
+  width: 15%;
+}
+.MaintableContent thead tr th:nth-child(4) {
+  width: 15%;
+}
+.MaintableContent thead tr th:nth-child(5) {
+  width: 5%;
+}
+.MaintableContent thead tr th:nth-child(6) {
+  width: 9%;
+}
+.MaintableContent thead tr th:nth-child(7) {
+  width: 9%;
+}
+.MaintableContent thead tr th:nth-child(8) {
+  width: 7%;
+}
+.MaintableContent thead tr th:nth-child(9) {
+  width: 10%;
+}
+.MaintableContent thead tr th:nth-child(10) {
+  width: 7%;
+}
+.MaintableContent thead tr th:nth-child(11) {
+  width: 7%;
+}
+
+.MaintableDemoContent thead tr th:nth-child(1) {
+  width: 3%;
+}
+.MaintableDemoContent thead tr th:nth-child(2) {
+  width: 4%;
+}
+.MaintableDemoContent thead tr th:nth-child(3) {
+  width: 6%;
+}
+.MaintableDemoContent thead tr th:nth-child(4) {
+  width: 10%;
+}
+.MaintableDemoContent thead tr th:nth-child(5) {
+  width: 7%;
+}
+.MaintableDemoContent thead tr th:nth-child(6) {
+  width: 8%;
+}
+.MaintableDemoContent thead tr th:nth-child(7) {
+  width: 8%;
+}
+.MaintableDemoContent thead tr th:nth-child(8) {
+  width: 5%;
+}
+.MaintableDemoContent thead tr th:nth-child(9) {
+  width: 6%;
+}
+.MaintableDemoContent thead tr th:nth-child(10) {
+  width: 13%;
+}
+.MaintableDemoContent thead tr th:nth-child(11) {
+  width: 8%;
+}
+.MaintableDemoContent thead tr th:nth-child(12) {
+  width: 5%;
+}
+.MaintableDemoContent thead tr th:nth-child(13) {
+  width: 5%;
+}
+.MaintableDemoContent thead tr th:nth-child(14) {
+  width: 7%;
+}
+.MaintableDemoContent thead tr th:nth-child(15) {
+  width: 5%;
+}
+.MaintableDemoContent thead tr th:nth-child(16) {
+  width: 13%;
+}
+.MaintableDemoContent thead tr th:nth-child(17) {
+  width: 3%;
+}
+.MaintableDemoContent thead tr th:nth-child(18) {
+  width: 10%;
+}
+
 .MaintableContent table tbody tr {
   margin-top: 140px;
   transition: 0.2s ease;
@@ -215,11 +344,29 @@
 .MaintableContent table tbody tr:hover td {
   color: rgb(0, 189, 199);
 }
+.MaintableDemoContent table tbody tr {
+  margin-top: 140px;
+  transition: 0.2s ease;
+  height: 50px;
+  transition: 0.5s;
+}
+.MaintableDemoContent table tbody tr:hover {
+  background: rgb(168, 232, 255);
+}
+.MaintableDemoContent table tbody tr:hover td {
+  color: rgb(0, 189, 199);
+}
 
 .MaintableContent table tbody tr td {
   border-bottom: 1px solid rgba(0, 189, 199, 0.313);
   white-space: nowrap;
   overflow: hidden;
+}
+.MaintableDemoContent table tbody tr td {
+  border-bottom: 1px solid rgba(0, 189, 199, 0.313);
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 10%;
 }
 .MaintableContent table tbody tr td span {
   font-weight: 800;
@@ -314,16 +461,17 @@
   background: rgb(0, 148, 153);
   box-shadow: 0px 0px 15px -5px black;
 }
-.FloaterBookDemoButton{
+.FloaterBookDemoButton {
   position: absolute;
   width: 50px;
   height: 50px;
   background: rgb(0, 148, 153);
   border-radius: 50px;
-  bottom: 10%;
+  bottom: 80px;
   right: 5%;
   border: none;
   color: white;
+  z-index: 100000;
   transition: 0.3s;
 }
 .FloaterBookDemoButton:hover {
@@ -334,21 +482,28 @@
   .MainDashLeft {
     width: 20%;
   }
-  .MaindashRight{
+  .MaindashRight {
     width: 80%;
   }
-  .SearchTextBoxCover{
+  .SearchTextBoxCover {
     width: 80%;
   }
-  .BookDemoButton{
+  .BookDemoButton {
     width: 200px;
+  }
+  .MaintableDemoContent table {
+    width: 300%;
+  }
+
+  .MaintableDemoContent table {
+    width: 500%;
   }
 }
 @media (max-width: 1200px) {
-  .BookDemoButton{
-    width: 250px;
+  .BookDemoButton {
+    width: 300px;
   }
-  .SearchFunctionCover{
+  .SearchFunctionCover {
     width: 80%;
   }
 }
@@ -356,36 +511,72 @@
   .MainDash {
     flex-direction: column-reverse;
   }
-  .MaindashRight{
+  .MaindashRight {
     width: 100%;
+    position: absolute;
+    height: 90vh;
+    top: 0;
+    overflow: scroll;
   }
   .MaintableContent table {
     width: 200%;
   }
-  .SearchTextBoxCover{
+  .SearchTextBoxCover {
     width: 80%;
   }
   .MaintableContent thead tr th {
     font-size: 12px;
+  }
+  .MainDashLeft {
+    width: 100vw;
+    position: absolute;
+    z-index: 1000;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .MaintableDemoContent table {
+    width: 700%;
   }
 }
 @media (max-width: 700px) {
   .MaintableContent table {
     width: 300%;
   }
-  .MainDashNavbarleft{
+  .MainDashNavbarleft {
     width: 90%;
   }
-  
-  .SearchTextBoxCover{
+
+  .SearchTextBoxCover {
     width: 90%;
   }
-  .Maintablebottom nav{
+  .Maintablebottom nav {
+    font-size: 10px;
+  }
+
+  .MaintableDemoContent table {
+    width: 500%;
+  }
+  .MaintableDemoContent table tbody tr td {
+    font-size: 10px;
+  }
+  .MaintableDemoContent table thead tr th {
     font-size: 10px;
   }
 }
+.TableHeadData {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media (max-width: 600px) {
-  .MainDashNavbarRight{
+  .MainDashNavbarRight {
     width: 5%;
+    padding-right: 0;
+  }
+  .SearchFunctionCover {
+    margin: 8px;
   }
 }

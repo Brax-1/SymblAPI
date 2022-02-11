@@ -25,11 +25,14 @@ const QuizComponent = () => {
     const arr = { search: '', sort: '' }
     arr['search'] = filterSort
     arr['sort'] = ''
+    const url = 'demo/getAll?offset=0&column=createdAt&order=DESC&limit=10'
     try {
       const data = ((await QuizApi.tableData(
+        url,
         arr
       )) as unknown) as ApiInnerData[][]
-      setData(data[0])
+      console.log(data)
+      setData([])
     } catch (error) {
       console.log(error)
     }

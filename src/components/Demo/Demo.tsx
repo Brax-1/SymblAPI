@@ -77,7 +77,7 @@ const Demo = (props: DemoProps) => {
       url,
       payload
     )) as unknown) as BookDemoInter
-    if (parsedData.code.toString() === '200') {
+    if (parsedData.data.code.toString() === '200') {
       props.setDemoOpen(false)
       setShowAlert(
         <MyAlert severity="success">Successfully Slot Booked</MyAlert>

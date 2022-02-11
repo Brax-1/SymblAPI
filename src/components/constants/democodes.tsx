@@ -27,6 +27,26 @@ export const Course = [
   { value: 'mathGenius', name: 'Math Genius' },
   { value: 'superMemory', name: 'Super Memory' },
 ]
+export const ColumnName = [
+  'id',
+  'phoneCode',
+  'phoneNumber',
+  'parentFirstName',
+  'parentGender',
+  'parentEmail',
+  'childName',
+  'grade',
+  'demoCourse',
+  'timezone',
+  'dateDay',
+  'timeslot',
+  'isAttended',
+  'ipAddress',
+  'sendEmail',
+  'sessionId',
+  'source',
+  'createdAt',
+]
 export const TimeZones = TimeZone.map((e, index) => {
   return {
     key: index.toString(),

@@ -35,14 +35,14 @@ export default class Http {
     }
   }
 
-  httpGet(url: string, params = {}) {
+  httpGet(url: string, params = {}, options = {}) {
     return new Promise((resolve, reject) => {
       const queryParams = this.makeQueryParams(params)
       this.axiosRequest
-        .get(`${url}${queryParams}`)
+        .get(`${url}${queryParams}`, options)
         .then((response) => {
           if (response.status === 200)
-            return resolve({ data: { ...response.data }, error: false })
+            return resolve({ ...response.data, error: false })
           return reject({ ...response, error: true })
         })
         .catch((err) => {

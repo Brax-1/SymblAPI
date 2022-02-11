@@ -9,8 +9,13 @@ interface filterBox {
   sort: string
 }
 export default class QuizApi {
-  static tableData(params: filterBox) {
-    const quizDataPromise = new Http(BASE_URL.JSON_URL).httpGet('/data', params)
+  static tableData(url: string, params: filterBox) {
+    const token = localStorage.getItem('token')
+    const quizDataPromise = new Http(BASE_URL.API_URL).httpGet(url, params, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
     return quizDataPromise
   }
   static loginAuth(url: string, params: UserLoginParams) {

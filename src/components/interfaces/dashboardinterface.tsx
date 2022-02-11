@@ -10,6 +10,38 @@ export interface ApiInnerData {
   name: string
   score: number
 }
+export interface DemoDataApi {
+  childName: string
+  createdAt: string
+  dateDay: string
+  dateMonth: string
+  dateYear: string
+  demoCourse: string
+  grade: string
+  id: number
+  ipAddress: string
+  isAttended: string
+  parentEmail: string
+  parentFirstName: string
+  parentGender: string
+  parentLastName: string
+  phoneCode: string
+  phoneNumber: string
+  sendEmail: string
+  sessionId: string
+  source: string
+  timeslot: string
+  timezone: string
+}
+export interface DemoDataCover {
+  data: {
+    code: string | number
+    allDemoDetails: [DemoDataApi[], number]
+  }
+  code: string | number
+  error: boolean
+  message: string
+}
 export interface MyTableProps {
   data: ApiInnerData[]
 }
