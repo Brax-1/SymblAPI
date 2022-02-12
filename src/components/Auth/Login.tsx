@@ -3,7 +3,7 @@ import { Alert, styled } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import style from '../../style/SignIn.module.css'
-import QuizApi from 'src/api/Quiz'
+import AuthApi from 'src/api/Auth'
 import Image from 'next/image'
 import vedxlogo from '../../images/ved_logo.png'
 import { setTokenInStorge } from 'src/utils/auth'
@@ -24,7 +24,7 @@ const Login = () => {
     setLoading(true)
     const url = `profved/login`
     try {
-      const parsedData = ((await QuizApi.loginAuth(url, {
+      const parsedData = ((await AuthApi.loginAuth(url, {
         username: userName,
         password: password,
       })) as unknown) as LoginMessageFormat
