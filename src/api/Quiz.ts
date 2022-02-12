@@ -6,7 +6,10 @@ interface UserLoginParams {
 }
 interface filterBox {
   search: string
-  sort: string
+  order: string
+  offset: number
+  limit: number
+  orderColumn: string
 }
 export default class QuizApi {
   static tableData(url: string, params: filterBox) {

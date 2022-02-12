@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import QuizApi from 'src/api/Quiz'
-import { Badge } from '@material-ui/core'
 import {
-  Email,
   Book,
   ArrowDropDownRounded,
   ArrowDropUpRounded,
 } from '@material-ui/icons'
 
-import Pagination from '@mui/material/Pagination'
 import Selector from '@components/Elements/selector'
 import {
   Paper,
@@ -23,20 +20,36 @@ import { DemoDataApi } from '@components/interfaces/dashboardinterface'
 import { DemoDataCover } from '@components/interfaces/dashboardinterface'
 import Demo from '@components/Demo/Demo'
 import Navbar from './navbar'
-import { SelectChangeEvent } from '@mui/material'
+import { SelectChangeEvent, TablePagination } from '@mui/material'
 import { ColumnName } from '@components/constants/democodes'
-
+import moment from 'moment'
 let OrderData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-let ordervalue = 17
+let ordervalue = 14
+let offsetValue = 0
+let rowsPerPage = 10
+const searchValue = ''
 const DemoComponent = () => {
   const [windowWidth, setWindowWidth] = useState(1400)
   const [filterSort, setFilterSort] = useState<string>('')
-  const [dataCount, setDataCount] = useState(0)
   const [DemoOpen, setDemoOpen] = useState(false)
-  const [offsetValue, setOffsetValue] = useState(0)
-  const setOffset = (event: SelectChangeEvent, value: number) => {
-    setOffsetValue((value - 1) * 10)
-    console.log(event)
+  const [CountPage, setCountPage] = useState(0)
+  const [Page, setPage] = useState(0)
+  const setOffset = (value: number) => {
+    offsetValue = value * rowsPerPage
+    setPage(value)
+    console.log(filterSort)
+    getData()
+  }
+  const handleChangeRowsPerPage = (event: SelectChangeEvent) => {
+    rowsPerPage = parseInt(event.target.value, 10)
+    offsetValue = 0
+    setPage(0)
+    getData()
+  }
+  function SearchData() {
+    const data = document.querySelector('.SearchTextBox')
+    console.log(data)
+    getData()
   }
   function ManageOrdervalue(value: number) {
     const InitialValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -45,6 +58,26 @@ const DemoComponent = () => {
     ordervalue = value
     getData()
   }
+  function ExtractDateandTime(value: string) {
+    let finalString = ''
+    let flag = 0
+    for (const i of value) {
+      if (flag < 2) {
+        if (i === 'T') {
+          finalString = finalString + ' '
+        } else {
+          if (i === ':') {
+            flag = flag + 1
+          }
+          if (flag < 2) {
+            finalString = finalString + i
+          }
+        }
+      }
+    }
+    return finalString
+  }
+
   const filterSelector = [
     { value: 'serial_No', name: 'Serial No' },
     { value: 'date', name: 'Date' },
@@ -57,14 +90,13 @@ const DemoComponent = () => {
   const [data, setData] = useState<DemoDataApi[]>([])
   async function getData() {
     const params = {
-      search: filterSort,
-      sort: '',
+      search: searchValue,
       order: 'ASC',
       offset: offsetValue,
-      limit: 10,
+      limit: rowsPerPage,
       orderColumn: ColumnName[ordervalue],
     }
-    console.log(ColumnName[ordervalue], ordervalue, 'columname')
+    console.log(params, 'params')
     if (OrderData[ordervalue]) {
       params['order'] = 'DESC'
     }
@@ -74,8 +106,8 @@ const DemoComponent = () => {
         url,
         params
       )) as unknown) as DemoDataCover
-      const pages = Math.ceil(data.data.allDemoDetails[1] / 10)
-      setDataCount(pages)
+      console.log('op', data)
+      setCountPage(data.data.allDemoDetails[1])
       setData(data.data.allDemoDetails[0])
     } catch (error) {
       console.log(error)
@@ -110,7 +142,9 @@ const DemoComponent = () => {
                       className="SearchTextBox"
                     />
                   </div>
-                  <button className="SearchButton">Search</button>
+                  <button className="SearchButton" onClick={() => SearchData()}>
+                    Search
+                  </button>
                   {windowWidth < 900 ? null : (
                     <button
                       className="BookDemoButton"
@@ -122,9 +156,9 @@ const DemoComponent = () => {
                 </div>
               </div>
               <div className="MainDashNavbarRight">
-                <Badge badgeContent={4} color="primary">
+                {/* <Badge badgeContent={4} color="primary">
                   <Email color="action" />
-                </Badge>
+                </Badge> */}
                 <div className="ProfileSpacer"></div>
               </div>
             </div>
@@ -158,7 +192,7 @@ const DemoComponent = () => {
                           ) : (
                             <ArrowDropUpRounded />
                           )}{' '}
-                          &nbsp; P CODE
+                          &nbsp; COUNTRY CODE
                         </div>
                       </TableCell>
                       <TableCell
@@ -172,7 +206,7 @@ const DemoComponent = () => {
                           ) : (
                             <ArrowDropUpRounded />
                           )}{' '}
-                          &nbsp; P NUMBER
+                          &nbsp; PHONE NUMBER
                         </div>
                       </TableCell>
                       <TableCell
@@ -316,48 +350,6 @@ const DemoComponent = () => {
                         </div>
                       </TableCell>
                       <TableCell
-                        onClick={() => ManageOrdervalue(13)}
-                        align="center"
-                      >
-                        <div className="TableHeadData">
-                          {' '}
-                          {OrderData[13] ? (
-                            <ArrowDropDownRounded />
-                          ) : (
-                            <ArrowDropUpRounded />
-                          )}{' '}
-                          &nbsp; IP ADDRESS
-                        </div>
-                      </TableCell>
-                      <TableCell
-                        onClick={() => ManageOrdervalue(14)}
-                        align="center"
-                      >
-                        <div className="TableHeadData">
-                          {' '}
-                          {OrderData[14] ? (
-                            <ArrowDropDownRounded />
-                          ) : (
-                            <ArrowDropUpRounded />
-                          )}{' '}
-                          &nbsp; SEND EMAIL
-                        </div>
-                      </TableCell>
-                      <TableCell
-                        onClick={() => ManageOrdervalue(15)}
-                        align="center"
-                      >
-                        <div className="TableHeadData">
-                          {' '}
-                          {OrderData[15] ? (
-                            <ArrowDropDownRounded />
-                          ) : (
-                            <ArrowDropUpRounded />
-                          )}{' '}
-                          &nbsp; SESSION ID
-                        </div>
-                      </TableCell>
-                      <TableCell
                         onClick={() => ManageOrdervalue(16)}
                         align="center"
                       >
@@ -403,30 +395,38 @@ const DemoComponent = () => {
                         <TableCell align="center">{row.demoCourse}</TableCell>
                         <TableCell align="center">{row.timezone}</TableCell>
                         <TableCell align="center">
-                          {row.dateDay} / {row.dateMonth} / {row.dateYear}
+                          {moment(
+                            `${row.dateDay}${row.dateMonth}${row.dateYear}`
+                          ).format('DD MMM YYYY')}
                         </TableCell>
-                        <TableCell align="center">{row.timeslot}</TableCell>
+                        <TableCell align="center">
+                          {row.timeslot % 12 === 0 ? '12' : row.timeslot % 12}
+                          {row.timeslot > 12 ? ':00 PM' : ':00 AM'}
+                        </TableCell>
                         <TableCell align="center">
                           {row.isAttended === '' ? 'NO' : 'YES'}
                         </TableCell>
-                        <TableCell align="center">{row.ipAddress}</TableCell>
-                        <TableCell align="center">{row.sendEmail}</TableCell>
-                        <TableCell align="center">{row.sessionId}</TableCell>
                         <TableCell align="center">{row.source}</TableCell>
-                        <TableCell align="center">{row.createdAt}</TableCell>
+                        <TableCell align="center">
+                          {ExtractDateandTime(row.createdAt)}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </TableContainer>
               <div className="Maintablebottom">
-                <Pagination
-                  count={dataCount}
-                  color="standard"
-                  shape="circular"
-                  style={{ color: 'white' }}
-                  onChange={(e, page) =>
-                    setOffset((e as unknown) as SelectChangeEvent, page)
+                <TablePagination
+                  rowsPerPageOptions={[2, 10, 20, 50, 100]}
+                  component="div"
+                  count={CountPage}
+                  rowsPerPage={rowsPerPage}
+                  page={Page}
+                  onPageChange={(page) =>
+                    setOffset((page as unknown) as number)
+                  }
+                  onRowsPerPageChange={(e) =>
+                    handleChangeRowsPerPage((e as unknown) as SelectChangeEvent)
                   }
                 />
               </div>

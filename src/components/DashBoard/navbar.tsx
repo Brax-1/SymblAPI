@@ -47,10 +47,7 @@ const Navbar = () => {
             aria-labelledby="nested-list-subheader"
           >
             <div className="LogoCover">
-              <Image src={vedxlogo} height="50px" width="40px" />
-              <div className="MainLogoName">
-                VEDX <span>Solutions</span>
-              </div>
+              <Image src={vedxlogo} height="60px" width="60px" />
             </div>
             <ListItemButton
               className="ListItemButton"

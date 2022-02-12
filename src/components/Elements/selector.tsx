@@ -17,6 +17,7 @@ export default function CountrySelect(props: MySelectorProps) {
         id="country-select-demo"
         sx={{ width: '100%' }}
         options={props.data}
+        defaultValue={props.data.find((v) => v.name)}
         autoHighlight
         getOptionLabel={(option) => option.name}
         renderOption={(props, option) => (
@@ -25,6 +26,7 @@ export default function CountrySelect(props: MySelectorProps) {
             component="li"
             sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
             {...props}
+            value={option.value}
           >
             {option.name}
           </Box>

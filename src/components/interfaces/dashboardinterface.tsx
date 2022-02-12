@@ -30,7 +30,7 @@ export interface DemoDataApi {
   sendEmail: string
   sessionId: string
   source: string
-  timeslot: string
+  timeslot: number
   timezone: string
 }
 export interface DemoDataCover {
@@ -84,7 +84,7 @@ export interface BookDemoPayload {
   dateDay: string
   dateMonth: string
   dateYear: string
-  timeslot: string
+  timeslot: number
   sendEmail: string
   sessionId: string
   source: string

@@ -3,6 +3,7 @@ import classes from 'src/style/Demo.module.css'
 import Selector from '@components/Elements/selector'
 import InputField from '@components/Elements/input'
 import {
+  Attendance,
   BookDemoInter,
   BookDemoPayload,
 } from '@components/interfaces/dashboardinterface'
@@ -20,6 +21,7 @@ import {
   Grade,
   Course,
   TimeZones,
+  Source,
 } from 'src/components/constants/democodes'
 
 const MyAlert = styled(Alert)({
@@ -31,16 +33,17 @@ const MyAlert = styled(Alert)({
 const CurentDay = new Date()
 const Demo = (props: DemoProps) => {
   const [showAlert, setShowAlert] = useState(<></>)
-  const [phoneCode, setPhoneCode] = useState('91')
+  const [phoneCode, setPhoneCode] = useState(PhoneCode[0].name)
   const [phoneNumber, setPhoneNumber] = useState('')
   const [pfirstname, setPfirstname] = useState('')
   const [plastname, setPlastname] = useState('')
-  const [pgender, setPgender] = useState('male')
+  const [pgender, setPgender] = useState('Male')
   const [pEmail, setPemail] = useState('')
   const [childName, setchildName] = useState('')
   const [grade, setgrade] = useState('1')
-  const [course, setCourse] = useState('mathGenius')
-  const [timeZone, setTimezone] = useState('')
+  const [course, setCourse] = useState('Math Genius')
+  const [timeZone, setTimezone] = useState(TimeZones[0].name)
+  const [source, setSource] = useState('Phone')
   const [DateTime, setDateTime] = useState<DateTimeStates>({
     dateDay: CurentDay.getDate(),
     dateMonth: CurentDay.getMonth() + 1,
@@ -65,11 +68,11 @@ const Demo = (props: DemoProps) => {
       dateDay: DateTime.dateDay.toString(),
       dateMonth: DateTime.dateMonth.toString(),
       dateYear: DateTime.dateYear.toString(),
-      timeslot: DateTime.timeSlot.toString(),
+      timeslot: DateTime.timeSlot,
       sendEmail: 'false',
       sessionId: uuid(),
-      source: 'WEB',
-      isAttended: 0,
+      source: source,
+      isAttended: Attendance.SCHEDULED,
       ipAddress: '',
     }
     const url = `demo/bookDemo`
@@ -159,8 +162,11 @@ const Demo = (props: DemoProps) => {
             </div>
           </div>
           <div className={classes.MainDemoFormCover}>
-            <div className={classes.MainDemoFormFull}>
+            <div className={classes.MainDemoFormHalf}>
               <DatepickerElement setDateTime={setDateTime} />
+            </div>
+            <div className={classes.MainDemoFormHalf}>
+              <Selector callback={setSource} data={Source} title="Source" />
             </div>
           </div>
           <div className={classes.MainDemoFormCover}>

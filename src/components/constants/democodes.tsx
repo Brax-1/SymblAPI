@@ -5,9 +5,9 @@ export const PhoneCode = PhoneCodes.map((val) => {
   return { value: val.dial_code, name: `${val.code} (${val.dial_code})` }
 })
 export const Gender = [
-  { value: 'male', name: 'Male' },
-  { value: 'female', name: 'Female' },
-  { value: 'other', name: 'Other' },
+  { value: 'Male', name: 'Male' },
+  { value: 'Female', name: 'Female' },
+  { value: 'Other', name: 'Other' },
 ]
 export const Grade = [
   { value: '1', name: '1' },
@@ -24,8 +24,15 @@ export const Grade = [
   { value: '12', name: '12' },
 ]
 export const Course = [
-  { value: 'mathGenius', name: 'Math Genius' },
-  { value: 'superMemory', name: 'Super Memory' },
+  { value: 'Math Genius', name: 'Math Genius' },
+  { value: 'Super Memory', name: 'Super Memory' },
+]
+export const Source = [
+  { value: 'Phone', name: 'Phone' },
+  { value: 'Facebook', name: 'Facebook' },
+  { value: 'Direct', name: 'Direct' },
+  { value: 'Email', name: 'Email' },
+  { value: 'Others', name: 'Others' },
 ]
 export const ColumnName = [
   'id',
@@ -41,9 +48,6 @@ export const ColumnName = [
   'dateDay',
   'timeslot',
   'isAttended',
-  'ipAddress',
-  'sendEmail',
-  'sessionId',
   'source',
   'createdAt',
 ]

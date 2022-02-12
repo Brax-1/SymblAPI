@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import QuizApi from 'src/api/Quiz'
-import { Badge } from '@material-ui/core'
-import { Email } from '@material-ui/icons'
 
 import Pagination from '@mui/material/Pagination'
 import Selector from '@components/Elements/selector'
@@ -66,9 +64,9 @@ const QuizComponent = () => {
                 </div>
               </div>
               <div className="MainDashNavbarRight">
-                <Badge badgeContent={4} color="primary">
+                {/* <Badge badgeContent={4} color="primary">
                   <Email color="action" />
-                </Badge>
+                </Badge> */}
                 <div className="ProfileSpacer"></div>
               </div>
             </div>
