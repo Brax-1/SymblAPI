@@ -1,4 +1,4 @@
-import { Button, Checkbox, LinearProgress } from '@material-ui/core'
+import { Button, LinearProgress } from '@material-ui/core'
 import { Alert, styled } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -39,7 +39,7 @@ const Login = () => {
           </MyAlert>
         )
         setTokenInStorge(parsedData.data.data.token)
-        router.push('/dashboard')
+        router.push(`/dashboard?username=${userName}`)
       } else {
         setShowAlert(
           <MyAlert
@@ -111,10 +111,10 @@ const Login = () => {
                   />
                 </div>
               </div>
-              <div className={style.LoginRememberMe}>
+              {/* <div className={style.LoginRememberMe}>
                 <Checkbox disabled />
                 Remember Me
-              </div>
+              </div> */}
               <div className={style.ButtonCover}>
                 <Button
                   variant="contained"

@@ -72,6 +72,7 @@
 }
 .ButtonCover {
   width: 80%;
+  margin-top: 30px;
 }
 @media (max-width: 1300px) {
   .LoginCover {

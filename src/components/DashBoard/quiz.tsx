@@ -20,20 +20,25 @@ const QuizComponent = () => {
   ]
   const [data, setData] = useState<ApiInnerData[]>([])
   async function getData() {
-    const arr = { search: '', sort: '' }
-    arr['search'] = filterSort
-    arr['sort'] = ''
+    const params = {
+      searchText: '',
+      order: 'ASC',
+      offset: 0,
+      limit: 1,
+      orderColumn: '',
+    }
     const url = 'demo/getAll?offset=0&column=createdAt&order=DESC&limit=10'
     try {
       const data = ((await QuizApi.tableData(
         url,
-        arr
+        params
       )) as unknown) as ApiInnerData[][]
       console.log(data)
       setData([])
     } catch (error) {
       console.log(error)
     }
+    console.log(filterSort)
   }
   useEffect(() => {
     getData()

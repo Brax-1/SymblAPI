@@ -117,3 +117,9 @@ export interface DateTimeStates {
 export interface DateAndTime {
   setDateTime: (n: DateTimeStates) => void
 }
+export interface BackdropProps {
+  open: boolean
+}
+export interface Homeprops {
+  username: string
+}

@@ -5,7 +5,6 @@ import {
   ArrowDropDownRounded,
   ArrowDropUpRounded,
 } from '@material-ui/icons'
-
 import Selector from '@components/Elements/selector'
 import {
   Paper,
@@ -27,28 +26,22 @@ let OrderData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 let ordervalue = 14
 let offsetValue = 0
 let rowsPerPage = 10
-const searchValue = ''
+let searchValue = ''
 const DemoComponent = () => {
-  const [windowWidth, setWindowWidth] = useState(1400)
   const [filterSort, setFilterSort] = useState<string>('')
   const [DemoOpen, setDemoOpen] = useState(false)
   const [CountPage, setCountPage] = useState(0)
   const [Page, setPage] = useState(0)
-  const setOffset = (value: number) => {
+  const setOffset = (event: SelectChangeEvent, value: number) => {
     offsetValue = value * rowsPerPage
     setPage(value)
-    console.log(filterSort)
+    console.log(filterSort, event)
     getData()
   }
   const handleChangeRowsPerPage = (event: SelectChangeEvent) => {
     rowsPerPage = parseInt(event.target.value, 10)
     offsetValue = 0
     setPage(0)
-    getData()
-  }
-  function SearchData() {
-    const data = document.querySelector('.SearchTextBox')
-    console.log(data)
     getData()
   }
   function ManageOrdervalue(value: number) {
@@ -58,26 +51,6 @@ const DemoComponent = () => {
     ordervalue = value
     getData()
   }
-  function ExtractDateandTime(value: string) {
-    let finalString = ''
-    let flag = 0
-    for (const i of value) {
-      if (flag < 2) {
-        if (i === 'T') {
-          finalString = finalString + ' '
-        } else {
-          if (i === ':') {
-            flag = flag + 1
-          }
-          if (flag < 2) {
-            finalString = finalString + i
-          }
-        }
-      }
-    }
-    return finalString
-  }
-
   const filterSelector = [
     { value: 'serial_No', name: 'Serial No' },
     { value: 'date', name: 'Date' },
@@ -90,13 +63,12 @@ const DemoComponent = () => {
   const [data, setData] = useState<DemoDataApi[]>([])
   async function getData() {
     const params = {
-      search: searchValue,
+      searchText: searchValue,
       order: 'ASC',
       offset: offsetValue,
       limit: rowsPerPage,
       orderColumn: ColumnName[ordervalue],
     }
-    console.log(params, 'params')
     if (OrderData[ordervalue]) {
       params['order'] = 'DESC'
     }
@@ -106,7 +78,6 @@ const DemoComponent = () => {
         url,
         params
       )) as unknown) as DemoDataCover
-      console.log('op', data)
       setCountPage(data.data.allDemoDetails[1])
       setData(data.data.allDemoDetails[0])
     } catch (error) {
@@ -114,9 +85,6 @@ const DemoComponent = () => {
     }
   }
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setWindowWidth(window.innerWidth)
-    }
     getData()
   }, [offsetValue])
   return (
@@ -140,19 +108,20 @@ const DemoComponent = () => {
                       type="text"
                       placeholder="Type here to search ..."
                       className="SearchTextBox"
+                      onChange={(e) => {
+                        searchValue = e.target.value
+                      }}
                     />
                   </div>
-                  <button className="SearchButton" onClick={() => SearchData()}>
+                  <button className="SearchButton" onClick={() => getData()}>
                     Search
                   </button>
-                  {windowWidth < 900 ? null : (
-                    <button
-                      className="BookDemoButton"
-                      onClick={() => setDemoOpen(true)}
-                    >
-                      Book Demo Quiz
-                    </button>
-                  )}
+                  <button
+                    className="BookDemoButton widthDisplayabove900"
+                    onClick={() => setDemoOpen(true)}
+                  >
+                    Book Demo Quiz
+                  </button>
                 </div>
               </div>
               <div className="MainDashNavbarRight">
@@ -192,7 +161,7 @@ const DemoComponent = () => {
                           ) : (
                             <ArrowDropUpRounded />
                           )}{' '}
-                          &nbsp; COUNTRY CODE
+                          &nbsp; CODE
                         </div>
                       </TableCell>
                       <TableCell
@@ -386,14 +355,24 @@ const DemoComponent = () => {
                         <TableCell align="center">{row.phoneCode}</TableCell>
                         <TableCell align="center">{row.phoneNumber}</TableCell>
                         <TableCell align="center">
-                          {row.parentFirstName} {row.parentLastName}
+                          {`${row.parentFirstName} ${row.parentLastName}`.slice(
+                            0,
+                            20
+                          )}
+                          {`${row.parentFirstName} ${row.parentLastName}`
+                            .length > 20
+                            ? '...'
+                            : null}
                         </TableCell>
                         <TableCell align="center">{row.parentGender}</TableCell>
                         <TableCell align="center">{row.parentEmail}</TableCell>
                         <TableCell align="center">{row.childName}</TableCell>
                         <TableCell align="center">{row.grade}</TableCell>
                         <TableCell align="center">{row.demoCourse}</TableCell>
-                        <TableCell align="center">{row.timezone}</TableCell>
+                        <TableCell align="center">
+                          {row.timezone.slice(0, 40)}
+                          {row.timezone.length > 40 ? '...' : null}
+                        </TableCell>
                         <TableCell align="center">
                           {moment(
                             `${row.dateDay}${row.dateMonth}${row.dateYear}`
@@ -408,7 +387,7 @@ const DemoComponent = () => {
                         </TableCell>
                         <TableCell align="center">{row.source}</TableCell>
                         <TableCell align="center">
-                          {ExtractDateandTime(row.createdAt)}
+                          {moment(row.createdAt).format('DD MMM YYYY, hh:mm a')}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -422,8 +401,8 @@ const DemoComponent = () => {
                   count={CountPage}
                   rowsPerPage={rowsPerPage}
                   page={Page}
-                  onPageChange={(page) =>
-                    setOffset((page as unknown) as number)
+                  onPageChange={(e, page) =>
+                    setOffset((e as unknown) as SelectChangeEvent, page)
                   }
                   onRowsPerPageChange={(e) =>
                     handleChangeRowsPerPage((e as unknown) as SelectChangeEvent)
@@ -434,14 +413,12 @@ const DemoComponent = () => {
           </div>
         </div>
 
-        {windowWidth < 900 ? (
-          <button
-            className="FloaterBookDemoButton"
-            onClick={() => setDemoOpen(true)}
-          >
-            <Book />
-          </button>
-        ) : null}
+        <button
+          className="FloaterBookDemoButton widthDisplaybelow900"
+          onClick={() => setDemoOpen(true)}
+        >
+          <Book />
+        </button>
       </div>
     </>
   )

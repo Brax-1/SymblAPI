@@ -23,7 +23,7 @@ export default function MaterialUIPickers(props: DateAndTime) {
   }
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <div>Choose Date and Time</div>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Stack spacing={3}>

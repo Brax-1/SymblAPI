@@ -35,7 +35,6 @@ export default class Http {
 
   setAuthToken = () => {
     const token = getStoredToken() as string
-    console.log(token)
     this.axiosRequest.defaults.headers.common[
       'authorization'
     ] = `Bearer ${token}`

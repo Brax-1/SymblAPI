@@ -1,7 +1,7 @@
 import Http, { BASE_URL } from './index'
 import { BookDemoPayload } from 'src/components/interfaces/dashboardinterface'
 interface filterBox {
-  search: string
+  searchText: string
   order: string
   offset: number
   limit: number

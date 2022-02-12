@@ -211,7 +211,7 @@
   table-layout: fixed;
 }
 .MaintableDemoContent table {
-  width: 250%;
+  width: 200%;
   background: white;
   text-align: center;
   border-top-left-radius: 10px;
@@ -288,19 +288,19 @@
   width: 6%;
 }
 .MaintableDemoContent thead tr th:nth-child(4) {
-  width: 10%;
+  width: 7%;
 }
 .MaintableDemoContent thead tr th:nth-child(5) {
-  width: 7%;
+  width: 6.5%;
 }
 .MaintableDemoContent thead tr th:nth-child(6) {
   width: 8%;
 }
 .MaintableDemoContent thead tr th:nth-child(7) {
-  width: 8%;
+  width: 6%;
 }
 .MaintableDemoContent thead tr th:nth-child(8) {
-  width: 5%;
+  width: 4%;
 }
 .MaintableDemoContent thead tr th:nth-child(9) {
   width: 6%;
@@ -309,7 +309,7 @@
   width: 13%;
 }
 .MaintableDemoContent thead tr th:nth-child(11) {
-  width: 8%;
+  width: 5%;
 }
 .MaintableDemoContent thead tr th:nth-child(12) {
   width: 5%;
@@ -318,19 +318,10 @@
   width: 5%;
 }
 .MaintableDemoContent thead tr th:nth-child(14) {
-  width: 7%;
+  width: 4.5%;
 }
 .MaintableDemoContent thead tr th:nth-child(15) {
-  width: 5%;
-}
-.MaintableDemoContent thead tr th:nth-child(16) {
-  width: 13%;
-}
-.MaintableDemoContent thead tr th:nth-child(17) {
-  width: 3%;
-}
-.MaintableDemoContent thead tr th:nth-child(18) {
-  width: 10%;
+  width: 8%;
 }
 
 .MaintableContent table tbody tr {
@@ -368,6 +359,7 @@
   white-space: nowrap;
   overflow: hidden;
   line-height: 10%;
+  text-align: start;
 }
 .MaintableContent table tbody tr td span {
   font-weight: 800;
@@ -479,6 +471,18 @@
   background: rgb(0, 182, 189);
   box-shadow: 0px 0px 15px -5px black;
 }
+.widthDisplaybelow900{
+  display: none;
+}
+.widthDisplayabove900{
+  display: block;
+}
+.EmptyHeading{
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 30px;
+  display: flex;
+}
 @media (max-width: 1400px) {
   .MainDashLeft {
     width: 20%;
@@ -495,10 +499,6 @@
   .MaintableDemoContent table {
     width: 300%;
   }
-
-  .MaintableDemoContent table {
-    width: 500%;
-  }
 }
 @media (max-width: 1200px) {
   .BookDemoButton {
@@ -511,6 +511,12 @@
 @media (max-width: 900px) {
   .MainDash {
     flex-direction: column-reverse;
+  }
+  .widthDisplaybelow900{
+    display: block;
+  }
+  .widthDisplayabove900{
+    display: none;
   }
   .MaindashRight {
     width: 100%;
@@ -537,7 +543,7 @@
   }
 
   .MaintableDemoContent table {
-    width: 700%;
+    width: 350%;
   }
 }
 @media (max-width: 700px) {
@@ -554,22 +560,19 @@
   .Maintablebottom nav {
     font-size: 10px;
   }
-
-  .MaintableDemoContent table {
-    width: 500%;
-  }
   .MaintableDemoContent table tbody tr td {
     font-size: 10px;
   }
   .MaintableDemoContent table thead tr th {
     font-size: 10px;
+    
   }
 }
 .TableHeadData {
   width: 100%;
   height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 @media (max-width: 600px) {
