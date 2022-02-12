@@ -121,5 +121,5 @@ export interface BackdropProps {
   open: boolean
 }
 export interface Homeprops {
-  username: string
+  username: string | string[]
 }
