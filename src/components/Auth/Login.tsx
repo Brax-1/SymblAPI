@@ -1,48 +1,69 @@
 import { Button, Checkbox, LinearProgress } from '@material-ui/core'
-import { Alert } from '@mui/material'
+import { Alert, styled } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import style from '../../style/SignIn.module.css'
 import QuizApi from 'src/api/Quiz'
-let showAlert = <></>
-
-interface loginMessageFormat {
-  code: string | number
-  error: boolean
-  msg: string
-}
-
+import Image from 'next/image'
+import vedxlogo from '../../images/ved_logo.png'
+import { setTokenInStorge } from 'src/utils/auth'
+import { LoginMessageFormat } from 'src/components/interfaces/dashboardinterface'
+const MyAlert = styled(Alert)({
+  padding: 8,
+  position: 'absolute',
+  zIndex: 10000,
+  width: '100vw',
+})
 const Login = () => {
   const [loading, setLoading] = useState(false)
+  const [showAlert, setShowAlert] = useState(<></>)
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
   async function handleLogin() {
     setLoading(true)
-    const url = `/remote_authentication/`
-    const parsedData = ((await QuizApi.loginAuth(url, {
-      username: userName,
-      password: password,
-    })) as unknown) as loginMessageFormat
-    console.log(parsedData)
-    if (parsedData.code.toString() === '200') {
-      showAlert = (
-        <Alert
+    const url = `profved/login`
+    try {
+      const parsedData = ((await QuizApi.loginAuth(url, {
+        username: userName,
+        password: password,
+      })) as unknown) as LoginMessageFormat
+      if (parsedData.data.code.toString() === '200') {
+        setShowAlert(
+          <MyAlert
+            variant="filled"
+            severity="success"
+            style={{ borderRadius: '0' }}
+          >
+            Successfully Sign in
+          </MyAlert>
+        )
+        setTokenInStorge(parsedData.data.data.token)
+        router.push('/dashboard')
+      } else {
+        setShowAlert(
+          <MyAlert
+            variant="filled"
+            severity="error"
+            style={{ borderRadius: '0' }}
+          >
+            Wrong Credentials
+          </MyAlert>
+        )
+        setLoading(false)
+      }
+    } catch (error) {
+      setShowAlert(
+        <MyAlert
           variant="filled"
-          severity="success"
+          severity="error"
           style={{ borderRadius: '0' }}
         >
-          Successfully Sign in
-        </Alert>
-      )
-      router.push('/dashboard')
-    } else if (parsedData.code.toString() === '401') {
-      showAlert = (
-        <Alert variant="filled" severity="error" style={{ borderRadius: '0' }}>
-          Wrong Credentials
-        </Alert>
+          Something Went Wrong !!
+        </MyAlert>
       )
       setLoading(false)
+      console.log(error, 'error')
     }
   }
 
@@ -53,7 +74,11 @@ const Login = () => {
         <div className={style.LoginCover}>
           {loading ? <LinearProgress style={{ width: '100%' }} /> : null}
           <div className={style.LoginDataCover}>
-            <div className={style.LoginLeftCover}></div>
+            <div className={style.LoginLeftCover}>
+              <div style={{ width: '70%', height: '80%' }}>
+                <Image src={vedxlogo} alt="fill" />
+              </div>
+            </div>
             <div className={style.LoginRightCover}>
               <div className={style.LoginSignInText}>Sign In With ProfVed</div>
               <div className={style.LoginInputCover}>
