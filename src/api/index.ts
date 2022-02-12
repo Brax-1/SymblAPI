@@ -1,9 +1,10 @@
 import axios, { AxiosInstance } from 'axios'
+import { getStoredToken } from 'src/utils/auth'
+import Router from 'next/router'
 
 export enum BASE_URL {
   API_URL = 'http://localhost:3001/api/v1/',
   JSON_URL = 'http://localhost:3006/',
-  PROFVED_URL = 'https://profved.com/wp-json/wp/v1',
 }
 
 export default class Http {
@@ -14,6 +15,31 @@ export default class Http {
       timeout: 5000,
       responseType: 'json',
     })
+    this.interceptors()
+  }
+
+  interceptors() {
+    this.axiosRequest.interceptors.response.use(
+      function (response) {
+        return response
+      },
+      function (error) {
+        const response = error.response
+        if (response.status === 403 || response.status === 401) {
+          Router.push('/admin')
+        }
+        return error
+      }
+    )
+  }
+
+  setAuthToken = () => {
+    const token = getStoredToken() as string
+    console.log(token)
+    this.axiosRequest.defaults.headers.common[
+      'authorization'
+    ] = `Bearer ${token}`
+    return this
   }
 
   makeQueryParams(params = {}) {
@@ -26,13 +52,6 @@ export default class Http {
       queryParams = queryParams.slice(0, -1)
     }
     return queryParams
-  }
-
-  addTokenToHeader() {
-    if (location.pathname !== '/') {
-      const token = localStorage.getItem('token')
-      this.axiosRequest.defaults.headers.common.Authorization = `Bearer ${token}`
-    }
   }
 
   httpGet(url: string, params = {}, options = {}) {
