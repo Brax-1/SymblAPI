@@ -18,10 +18,12 @@ export default function InputField(props: MyInputProps) {
     >
       <div>{props.data}</div>
       <TextField
+        type={props.type}
         style={{ width: '100%' }}
         id="filled-textarea"
         placeholder={`${props.data}`}
         onChange={(e) => handleChange((e as unknown) as SelectChangeEvent)}
+        required
       />
     </Box>
   )

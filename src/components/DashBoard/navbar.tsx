@@ -43,8 +43,6 @@ const Navbar = () => {
       setOpenbackdrop(true)
     }
   }
-
-  console.log(router)
   return (
     <>
       <SimpleBackdrop open={openBackdrop} />

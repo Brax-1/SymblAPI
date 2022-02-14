@@ -78,11 +78,68 @@ const DemoComponent = () => {
         url,
         params
       )) as unknown) as DemoDataCover
+      console.log(data.data.allDemoDetails[0])
       setCountPage(data.data.allDemoDetails[1])
       setData(data.data.allDemoDetails[0])
     } catch (error) {
       console.log(error)
     }
+  }
+  function ConvertToUTC(date: string, hour: number, min: number) {
+    const UTCvalue = `${date} ${hour}:${min}:00`
+    const stillUtc = moment.utc(UTCvalue).toDate()
+    const local = moment(stillUtc).local().format('HH:mm A')
+    return local
+  }
+
+  function ExtracTime(value: string, Current: number, Currentdate: string) {
+    let sign = true
+    let flag = 0
+    let hour = ''
+    let min = ''
+    for (const i of value) {
+      if (flag < 6) {
+        if (flag > 0) {
+          if (flag < 3) {
+            hour = hour + i
+          } else {
+            if (flag !== 3) {
+              min = min + i
+            }
+          }
+          flag = flag + 1
+        }
+        if (i == '-') {
+          sign = false
+          flag = 1
+        }
+        if (i == '+') {
+          flag = 1
+        }
+      }
+    }
+    let IntHour = parseInt(hour)
+    let IntMin = parseInt(min)
+    const CurrentValueInt = parseInt(Current.toString())
+    if (sign === false) {
+      IntHour = (IntHour + CurrentValueInt) % 24
+    } else {
+      if (IntMin > 0) {
+        if (IntHour + 1 >= CurrentValueInt) {
+          IntHour = 24 + CurrentValueInt - IntHour - 1
+        } else {
+          IntHour = CurrentValueInt - IntHour - 1
+        }
+        IntMin = 60 - IntMin
+      } else {
+        if (IntHour >= CurrentValueInt) {
+          IntHour = 24 + CurrentValueInt - IntHour
+        } else {
+          IntHour = CurrentValueInt - IntHour
+        }
+      }
+    }
+    return ConvertToUTC(Currentdate, IntHour, IntMin)
   }
   useEffect(() => {
     getData()
@@ -175,7 +232,7 @@ const DemoComponent = () => {
                           ) : (
                             <ArrowDropUpRounded />
                           )}{' '}
-                          &nbsp; PHONE NUMBER
+                          &nbsp; PHONE NO.
                         </div>
                       </TableCell>
                       <TableCell
@@ -261,6 +318,12 @@ const DemoComponent = () => {
                           )}{' '}
                           &nbsp; DEMO COURSE
                         </div>
+                      </TableCell>
+                      <TableCell
+                        onClick={() => ManageOrdervalue(9)}
+                        align="center"
+                      >
+                        <div className="TableHeadData">LOCAL TIME</div>
                       </TableCell>
                       <TableCell
                         onClick={() => ManageOrdervalue(9)}
@@ -369,14 +432,22 @@ const DemoComponent = () => {
                         <TableCell align="center">{row.childName}</TableCell>
                         <TableCell align="center">{row.grade}</TableCell>
                         <TableCell align="center">{row.demoCourse}</TableCell>
+
+                        <TableCell align="center">
+                          {ExtracTime(
+                            row.timezone,
+                            row.timeslot,
+                            `${row.dateYear}-${row.dateMonth}-${row.dateDay}`
+                          )}
+                        </TableCell>
                         <TableCell align="center">
                           {row.timezone.slice(0, 40)}
                           {row.timezone.length > 40 ? '...' : null}
                         </TableCell>
                         <TableCell align="center">
                           {moment(
-                            `${row.dateDay}${row.dateMonth}${row.dateYear}`
-                          ).format('DD MMM YYYY')}
+                            `${row.dateYear}${row.dateDay}${row.dateMonth}`
+                          ).format('ll')}
                         </TableCell>
                         <TableCell align="center">
                           {row.timeslot % 12 === 0 ? '12' : row.timeslot % 12}
@@ -387,7 +458,7 @@ const DemoComponent = () => {
                         </TableCell>
                         <TableCell align="center">{row.source}</TableCell>
                         <TableCell align="center">
-                          {moment(row.createdAt).format('DD MMM YYYY, hh:mm a')}
+                          {moment(row.createdAt).format('DD MMM YYYY, hh:mm A')}
                         </TableCell>
                       </TableRow>
                     ))}

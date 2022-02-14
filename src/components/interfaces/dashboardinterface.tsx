@@ -57,6 +57,7 @@ export interface MySelectorProps {
 export interface MyInputProps {
   callback: (n: string) => void
   data: string
+  type: string
 }
 export interface MyChipProp {
   callback: (n: string) => void
@@ -65,10 +66,10 @@ export interface MyChipProp {
   current: string
 }
 export enum Attendance {
-  SCHEDULED,
-  PRESENT,
-  ABSENT,
-  RESCHEDULED,
+  SCHEDULED = 'SCHEDULED',
+  PRESENT = 'PRESENT',
+  ABSENT = 'ABSENT',
+  RESCHEDULED = 'RESCHEDULED',
 }
 export interface BookDemoPayload {
   phoneCode: string

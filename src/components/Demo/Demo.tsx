@@ -107,7 +107,7 @@ const Demo = (props: DemoProps) => {
       </div>
       <div className={classes.MainDemoCover}>
         <div className={classes.MainDemoForm}>
-          <div className={classes.MainDemoTitle}>Book Your Demo Class</div>
+          <div className={classes.MainDemoTitle}></div>
           <div className={classes.MainDemoFormCover}>
             <div className={classes.MainDemoFormQuarter1}>
               <Selector
@@ -117,12 +117,20 @@ const Demo = (props: DemoProps) => {
               />
             </div>
             <div className={classes.MainDemoFormQuarter3}>
-              <InputField callback={setPhoneNumber} data={'Phone Number'} />
+              <InputField
+                type="text"
+                callback={setPhoneNumber}
+                data={'Phone Number'}
+              />
             </div>
           </div>
           <div className={classes.MainDemoFormCover}>
             <div className={classes.MainDemoFormHalf}>
-              <InputField callback={setchildName} data={'Child Name'} />
+              <InputField
+                type="text"
+                callback={setchildName}
+                data={'Child Name'}
+              />
             </div>
             <div className={classes.MainDemoFormQuarterGrade}>
               <Selector callback={setgrade} data={Grade} title="Grade" />
@@ -133,10 +141,18 @@ const Demo = (props: DemoProps) => {
           </div>
           <div className={classes.MainDemoFormCover}>
             <div className={classes.MainDemoFormHalf}>
-              <InputField callback={setPfirstname} data={'Parent First Name'} />
+              <InputField
+                type="text"
+                callback={setPfirstname}
+                data={'Parent First Name'}
+              />
             </div>
             <div className={classes.MainDemoFormHalf}>
-              <InputField callback={setPlastname} data={'Parent Last Name'} />
+              <InputField
+                type="text"
+                callback={setPlastname}
+                data={'Parent Last Name'}
+              />
             </div>
           </div>
           <div className={classes.MainDemoFormCover}>
@@ -148,7 +164,11 @@ const Demo = (props: DemoProps) => {
               />
             </div>
             <div className={classes.MainDemoFormQuarter3}>
-              <InputField callback={setPemail} data={'Parent Email-ID'} />
+              <InputField
+                type="email"
+                callback={setPemail}
+                data={'Parent Email-ID'}
+              />
             </div>
           </div>
 

@@ -107,7 +107,7 @@
   box-shadow: 0px 0px 5px -3px black;
 }
 .MainDashNavbarleft {
-  width: 70%;
+  width: 800px;
   display: flex;
   height: 50%;
   align-items: center;
@@ -155,7 +155,7 @@
   background: rgb(0, 101, 106);
 }
 .MainDashNavbarRight {
-  width: 30%;
+  width: 0%;
   height: 50%;
   display: flex;
   justify-content: end;
@@ -279,49 +279,55 @@
 }
 
 .MaintableDemoContent thead tr th:nth-child(1) {
-  width: 3%;
+  width: 30px;
 }
 .MaintableDemoContent thead tr th:nth-child(2) {
-  width: 4%;
+  width: 40px;
 }
 .MaintableDemoContent thead tr th:nth-child(3) {
-  width: 6%;
+  width: 60px;
 }
 .MaintableDemoContent thead tr th:nth-child(4) {
-  width: 7%;
+  width: 70px;
 }
 .MaintableDemoContent thead tr th:nth-child(5) {
-  width: 6.5%;
+  width: 6.50px;
 }
 .MaintableDemoContent thead tr th:nth-child(6) {
-  width: 8%;
+  width: 80px;
 }
 .MaintableDemoContent thead tr th:nth-child(7) {
-  width: 6%;
+  width: 60px;
 }
 .MaintableDemoContent thead tr th:nth-child(8) {
-  width: 4%;
+  width: 40px;
 }
 .MaintableDemoContent thead tr th:nth-child(9) {
-  width: 6%;
+  width: 60px;
 }
 .MaintableDemoContent thead tr th:nth-child(10) {
-  width: 13%;
+  width: 50px;
+}
+.MaintableDemoContent thead tr th:nth-child(10) .TableHeadData {
+  justify-content: center;
 }
 .MaintableDemoContent thead tr th:nth-child(11) {
-  width: 5%;
+  width: 130px;
 }
 .MaintableDemoContent thead tr th:nth-child(12) {
-  width: 5%;
+  width: 50px;
 }
 .MaintableDemoContent thead tr th:nth-child(13) {
-  width: 5%;
+  width: 50px;
 }
 .MaintableDemoContent thead tr th:nth-child(14) {
-  width: 4.5%;
+  width: 60px;
 }
 .MaintableDemoContent thead tr th:nth-child(15) {
-  width: 8%;
+  width: 4.50px;
+}
+.MaintableDemoContent thead tr th:nth-child(16) {
+  width: 80px;
 }
 
 .MaintableContent table tbody tr {
@@ -360,6 +366,21 @@
   overflow: hidden;
   line-height: 10%;
   text-align: start;
+}
+.MaintableDemoContent table tbody tr td:nth-child(1) {
+  text-align: center;
+}
+.MaintableDemoContent table tbody tr td:nth-child(8) {
+  text-align: center;
+}
+.MaintableDemoContent table tbody tr td:nth-child(10) {
+  text-align: center;
+}
+.MaintableDemoContent table tbody tr td:nth-child(13) {
+  text-align: center;
+}
+.MaintableDemoContent table tbody tr td:nth-child(15) {
+  text-align: center;
 }
 .MaintableContent table tbody tr td span {
   font-weight: 800;
@@ -550,10 +571,6 @@
   .MaintableContent table {
     width: 300%;
   }
-  .MainDashNavbarleft {
-    width: 90%;
-  }
-
   .SearchTextBoxCover {
     width: 90%;
   }
@@ -576,11 +593,44 @@
   align-items: center;
 }
 @media (max-width: 600px) {
-  .MainDashNavbarRight {
-    width: 5%;
-    padding-right: 0;
-  }
   .SearchFunctionCover {
     margin: 8px;
+  }
+}
+
+@media (max-width: 2300px) {
+  .MaintableDemoContent table {
+    width: 130%;
+  }
+}
+
+@media (max-width: 2100px) {
+  .MaintableDemoContent table {
+    width: 135%;
+  }
+}
+@media (max-width: 2000px) {
+  .MaintableDemoContent table {
+    width: 140%;
+  }
+}
+@media (max-width: 1900px) {
+  .MaintableDemoContent table {
+    width: 145%;
+  }
+}
+@media (max-width: 1800px) {
+  .MaintableDemoContent table {
+    width: 155%;
+  }
+}
+@media (max-width: 1700px) {
+  .MaintableDemoContent table {
+    width: 165%;
+  }
+}
+@media (max-width: 1600px) {
+  .MaintableDemoContent table {
+    width: 200%;
   }
 }
