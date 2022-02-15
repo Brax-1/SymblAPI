@@ -3,6 +3,9 @@ import { AppProps } from 'next/app'
 import { storeWrapper } from '@store/store'
 import '@common/css/layout.scss'
 import '../style/global.css'
+// import "slick-carousel/slick/sli";
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import Script from 'next/script'
 
 /**

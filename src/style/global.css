@@ -16,7 +16,7 @@
   background: rgb(255, 255, 255);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(0, 189, 199);
+  background: rgba(0, 0, 0, 0.267);
   border-radius: 10px;
 }
 .LogoCover {
@@ -341,6 +341,7 @@
 }
 .MaintableContent table tbody tr:hover td {
   color: rgb(0, 189, 199);
+  background-color: linear-gradient(45deg,rgb(0, 189, 199),rgb(0, 126, 199));
 }
 .MaintableDemoContent table tbody tr {
   margin-top: 140px;

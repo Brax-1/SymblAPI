@@ -86,9 +86,10 @@ const DemoComponent = () => {
     }
   }
   function ConvertToUTC(date: string, hour: number, min: number) {
+    console.log(date, 'date')
     const UTCvalue = `${date} ${hour}:${min}:00`
     const stillUtc = moment.utc(UTCvalue).toDate()
-    const local = moment(stillUtc).local().format('HH:mm A')
+    const local = moment(stillUtc).local().format('MMMM Do YYYY, h:mm:ss A')
     return local
   }
 
